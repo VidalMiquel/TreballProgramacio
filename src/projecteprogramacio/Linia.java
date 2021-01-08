@@ -27,8 +27,8 @@ public class Linia {
         return caracteres[posicion];
     }
     
-    public void añadirCaracter(char caracter){
-        caracteres[numeroCaracteres]= caracter;
+    public void añadirCaracter(int codigo){
+        caracteres[numeroCaracteres]= (char)codigo;
         numeroCaracteres++;
     }
     @Override

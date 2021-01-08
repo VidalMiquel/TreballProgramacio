@@ -11,11 +11,10 @@ public class ProjecteProgramacio {
         boolean sortir = false;
 
         Palabra pal = new Palabra();
-        Buscador busca = new Buscador();
         System.out.println("NOMBRE DEL FICHERO A ANALIZAR: ");
         String nombreFichero = LT.readLine();
         PalabraFicheroIn palFicheroIn = new PalabraFicheroIn("fitxer.txt");
-        Analisi anal = new Analisi();
+        PalabraServicio anal = new PalabraServicio();
         while (palFicheroIn.hayPalabras()) {
             pal = palFicheroIn.lectura();
             anal.incrementarNumeroPalabras();
@@ -26,7 +25,7 @@ public class ProjecteProgramacio {
                 anal.incrementarNumeroCaracteres();
 
             }
-            anal.prova(pal);
+            anal.incrementarContadorPalabras(pal);
             System.out.println(pal.toString());
         }
         palFicheroIn.cerraFichero();
@@ -66,9 +65,8 @@ public class ProjecteProgramacio {
                     while (palFicheroIn1.hayPalabras()) {
                         pal = palFicheroIn1.lectura();
                         if(anal.sonIguales(pal, aux)){
-                 System.out.println(busca.imprimirLugarExacto(pal));   
+                 System.out.println(anal.imprimirLugarExacto(pal));   
                         }
-
                     }
                     palFicheroIn.cerraFichero();
                     break;
