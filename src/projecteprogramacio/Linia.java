@@ -7,7 +7,6 @@ public class Linia {
     private static final int NUMERO_MAXIMO_CARACTERES = 250;
     char [] caracteres = new char [NUMERO_MAXIMO_CARACTERES];
     
-    
     public void Linia(){
         numeroCaracteres = 0;
     }
