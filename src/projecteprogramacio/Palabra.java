@@ -10,7 +10,6 @@ public class Palabra {
     private int linea=0;
     private int columna=0;
 
-
     public Palabra() {
         numeroCaracteres = 0;
     }
@@ -24,17 +23,18 @@ public class Palabra {
         return numeroCaracteres;
     }
     
+    public boolean vacia(){
+        return numeroCaracteres == 0;
+    }
     
-    public void añadirCaracter(char caracter){
-        caracteres[numeroCaracteres]= caracter;
+    public void añadirCaracter(int codigo){
+        caracteres[numeroCaracteres]= (char)codigo;
         numeroCaracteres++;
     }
     
     public char obtenerCaracter(int posicion){
-        
         return caracteres[posicion];
     }
-    
     
     @Override
     public String toString() {
@@ -45,8 +45,6 @@ public class Palabra {
         return aux;
     }
     
-    
-    //COSES NO REVISADES
      public int getLinea() {
         return linea;
     }

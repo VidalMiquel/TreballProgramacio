@@ -1,23 +1,20 @@
 package projecteprogramacio;
 
-public class Analisi {
-
+public class PalabraServicio {
     private static final int NUMERO_MAXIMO_PALABRAS = 500;
     private static final char[] alfabeto = "abcdefghijklmnñopqrstuvwxyz".toCharArray();
     Palabra[] Palabras;
     int[] contadorCaracteres;
     int[] contadorPalabras;
-    int numeroLinias;
     int numeroPalabras;
     int numeroCaracteres;
     private boolean primeraColocada = false;
-
-    public Analisi() throws Exception{
+    
+     public PalabraServicio() throws Exception{
         Palabras = new Palabra[500];
         inicilaitzarArrayPalabras();
         contadorCaracteres = new int[alfabeto.length];
         contadorPalabras = new int[NUMERO_MAXIMO_PALABRAS];
-        numeroLinias = 0;
         numeroPalabras = 0;
         numeroCaracteres = 0;
 
@@ -70,20 +67,12 @@ public class Analisi {
         return salida;
     }
 
-    public void incrementarNumeroLinias() {
-        numeroLinias++;
-    }
-
     public void incrementarNumeroCaracteres() {
         numeroCaracteres++;
     }
 
     public void incrementarNumeroPalabras() {
         numeroPalabras++;
-    }
-
-    public int getNumeroLinias() {
-        return numeroLinias;
     }
 
     public int getNumeroPalabras() {
@@ -109,6 +98,7 @@ public class Analisi {
         }
 
     }
+    
     //Imprimir por pantalla la palabra que aparece mas veces en el fichero
     public String palabraMasRepetidatoString() {
 
@@ -136,7 +126,8 @@ public class Analisi {
         }
     }
     
-    public void prova(Palabra palabra){
+    //incrementar Arry Palabrs y contadorPalabras
+    public void incrementarContadorPalabras(Palabra palabra){
 
         boolean acabat = false;
         for(int i = 0; i< Palabras.length&&!acabat;i++){
@@ -156,38 +147,7 @@ public class Analisi {
              }
             }
         }
-
-
-
     
-    
-
-    //rellenar array contadorPalabras
-    public void incrementarContadorPalabras(Palabra palabra) {
-        int j;
-
-        for (int i = 0; i < Palabras.length; i++) {
-            j = i + 1;
-            if (!primeraColocada) {
-                Palabras[i] = palabra;
-                contadorPalabras[i]++;
-                primeraColocada = true;
-                break;
-            } else if (sonIguales(palabra, i)) {
-                contadorPalabras[i]++;
-                break;
-            } else {
-                Palabras[j] = palabra;
-                contadorPalabras[j]++;
-                break;
-            }
-        }
-    }
-    
-   
-
-    
-   
     //Compara si dos palabras pasadas por parametro son iguales
     public boolean sonIguales(Palabra palabra, Palabra auxiliar) {
 
@@ -203,6 +163,14 @@ public class Analisi {
         }
 
     }
+    
+      public String imprimirLugarExacto(Palabra palabra){
+        
+        String salida = "";
+        salida = salida + "LA PALABRA " + palabra.toString() + " APARECE EN LA LINIA " +
+                palabra.getLinea() + " Y LA COLUMNA " + palabra.getColumna();
+        
+        return salida;
+    }
 
 }
-
