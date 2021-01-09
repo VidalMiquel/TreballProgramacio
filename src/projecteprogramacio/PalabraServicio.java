@@ -50,8 +50,8 @@ public class PalabraServicio {
         }
 
         salida = salida + "CARACTER MÁS REPETIDO ES: "
-                + letra + "CON"
-                + caracterMasRepetido + "APARICIONES";
+                + letra + " CON "
+                + caracterMasRepetido + " APARICIONES";
 
         return salida;
     }
@@ -61,8 +61,8 @@ public class PalabraServicio {
 
         String salida = "\n";
         for (int i = 0; i < alfabeto.length; i++) {
-            salida = salida + "EL NUMERO DE APARICIONES DEL CARACTER :"
-                    + alfabeto[i] + "ES " + contadorCaracteres[i] + ".\n";
+            salida = salida + "EL NUMERO DE APARICIONES DEL CARACTER : "
+                    + alfabeto[i] + " ES " + contadorCaracteres[i] + ".\n";
         }
         return salida;
     }
@@ -140,7 +140,7 @@ public class PalabraServicio {
             }else if(sonIguales(palabra, i)){
                 contadorPalabras[i]++;
                 acabat = true;
-            }else if(Palabras[i].getNumeroCaracteres()==0){
+            }else if(Palabras[i].vacia()){
                  Palabras[i] = palabra;
                  contadorPalabras[i]++;
                  acabat = true;

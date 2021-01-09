@@ -9,35 +9,19 @@ public class ProjecteProgramacio {
 
     public void ProgramaPrincipal() throws Exception {
         boolean sortir = false;
+        int semilla;
+        char caracter;
 
-        Palabra pal = new Palabra();
+        Palabra pal;
         System.out.println("NOMBRE DEL FICHERO A ANALIZAR: ");
         String nombreFichero = LT.readLine();
         PalabraFicheroIn palFicheroIn = new PalabraFicheroIn("fitxer.txt");
         PalabraServicio anal = new PalabraServicio();
-        while (palFicheroIn.hayPalabras()) {
-            pal = palFicheroIn.lectura();
-            anal.incrementarNumeroPalabras();
-
-            for (int i = 0; i < pal.getNumeroCaracteres(); i++) {
-                char caracter = pal.obtenerCaracter(i);
-                anal.incrementarContadorCaracteres(caracter);
-                anal.incrementarNumeroCaracteres();
-
-            }
-            anal.incrementarContadorPalabras(pal);
-            System.out.println(pal.toString());
-        }
-        palFicheroIn.cerraFichero();
-        System.out.println(anal.caracterMasRepetidotoString());
-        System.out.println("EL NUMERO DE PALABRAS QUE HAY SON: " + anal.getNumeroPalabras());
-        System.out.println("EL NUMERO DE CARACTERES QUE HAY SON: " + anal.getNumeroCaracteres());
-        System.out.println(anal.palabraMasRepetidatoString());
-
+        CodificacionAlfabetica cod;
         while (!sortir) {
             borrarPantalla();
             menu();
-            System.out.print("INTRODUCE LA OPCION A RELAIZAR: ");
+            System.out.print("INTRODUCE LA OPCION A REALIZAR: ");
             int opcioMenu = LT.readInt();
             switch (opcioMenu) {
 
@@ -45,11 +29,27 @@ public class ProjecteProgramacio {
                     sortir = true;
                     break;
                 case 1:
-                    System.out.println("OPCIÓN 1");
-                    anal.imprimirNumeroCaractersArrayparaula();
+                    while (palFicheroIn.hayPalabras()) {
+                        pal = palFicheroIn.lectura();
+                        for (int i = 0; i < pal.getNumeroCaracteres(); i++) {
+                            caracter = pal.obtenerCaracter(i);
+                            anal.incrementarContadorCaracteres(caracter);
+                        }
+
+                    }
+                    palFicheroIn.cerraFichero();
+                    System.out.println(anal.caracterMasRepetidotoString());
                     break;
                 case 2:
-                    System.out.println("OPCIÓN 2");
+                    while (palFicheroIn.hayPalabras()) {
+                        pal = palFicheroIn.lectura();
+                        for (int i = 0; i < pal.getNumeroCaracteres(); i++) {
+                            caracter = pal.obtenerCaracter(i);
+                            anal.incrementarContadorCaracteres(caracter);
+                        }
+                    }
+                    palFicheroIn.cerraFichero();
+                    System.out.println(anal.numeroAparcicionesCaractertoString());
                     break;
                 case 3:
                     System.out.println("OPCIÓN 3");
@@ -61,11 +61,11 @@ public class ProjecteProgramacio {
                     System.out.println("PALABRA A BUSCAR:");
                     String palabra = LT.readLine();
                     aux = new Palabra(palabra);
-                      System.out.println("LA PALABRA BUSCADA ES: " + aux);
+                    System.out.println("LA PALABRA BUSCADA ES: " + aux);
                     while (palFicheroIn1.hayPalabras()) {
                         pal = palFicheroIn1.lectura();
-                        if(anal.sonIguales(pal, aux)){
-                 System.out.println(anal.imprimirLugarExacto(pal));   
+                        if (anal.sonIguales(pal, aux)) {
+                            System.out.println(anal.imprimirLugarExacto(pal));
                         }
                     }
                     palFicheroIn.cerraFichero();
@@ -77,34 +77,45 @@ public class ProjecteProgramacio {
                     System.out.println("OPCIÓN 6");
                     break;
                 case 7:
- 
+
                     LiniaFicheroIn fichero = new LiniaFicheroIn("fitxer.txt");
                     LiniaFicheroOut ficheroCod = new LiniaFicheroOut("fitxerCod.txt");
                     System.out.print("SEMILLA: ");
-                    int semilla = LT.readInt();
-                    CodificacionAlfabetica cod = new CodificacionAlfabetica(semilla);
+                    semilla = LT.readInt();
+                    cod = new CodificacionAlfabetica(semilla);
                     Linia secuencia;
                     Linia auxiliar;
                     int codigo;
-                    while(fichero.hayLineas()){
+                    while (fichero.hayLineas()) {
                         auxiliar = new Linia();
                         secuencia = fichero.lectura();
-                        
-                        for(int i = 0; i<secuencia.getNumCaracteres();i++){
-                            codigo =(char)cod.codificar(secuencia.obtenerCaracter(i));
-                            auxiliar.adicionCaracter(codigo);
-                        
+                        for (int i = 0; i < secuencia.getNumeroCaracteres(); i++) {
+                            codigo = (char) cod.codificar(secuencia.obtenerCaracter(i));
+                            auxiliar.añadirCaracter(codigo);
                         }
-                            ficheroCod.escrituraLinia(auxiliar);
-                           // ficheroCod.nuevaLinea();
+                        ficheroCod.escrituraLinia(auxiliar);
                     }
                     fichero.cerrarFichero();
                     ficheroCod.cerrarFichero();
-                    System.out.println("OPCIÓN 7");
                     break;
                 case 8:
-                    System.out.println("OPCIÓN 8");
-
+                    LiniaFicheroIn ficheroCodi = new LiniaFicheroIn("fitxerCod.txt");
+                    LiniaFicheroOut ficheroDec = new LiniaFicheroOut("fitxerDecod.txt");
+                    cod = new CodificacionAlfabetica(5);
+                    Linia secuenciaCod;
+                    Linia auxi;
+                    int codi;
+                    while(ficheroCodi.hayLineas()){
+                        auxi = new Linia();
+                        secuenciaCod = ficheroCodi.lectura();
+                        for(int i = 0; i< secuenciaCod.getNumeroCaracteres();i++){
+                            codi = (char)cod.deCodificar(secuenciaCod.obtenerCaracter(i));
+                            auxi.añadirCaracter(codi);
+                        }
+                        ficheroDec.escrituraLinia(auxi);
+                    }
+                    ficheroCodi.cerrarFichero();
+                    ficheroDec.cerrarFichero();
             }
 
         }
