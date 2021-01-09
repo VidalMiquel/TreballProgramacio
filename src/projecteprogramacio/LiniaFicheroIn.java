@@ -18,7 +18,6 @@ public class LiniaFicheroIn{
         BufferedFicheroIn = new BufferedReader(FileFicheroIn);
     } 
         public boolean hayLineas() throws Exception {
-        //lectura código de caracter desde el fichero
         codigo=BufferedFicheroIn.read();
         return (codigo!=FINAL_FICHERO); 
     }
@@ -29,7 +28,7 @@ public class LiniaFicheroIn{
             return linea;
         }  
         while ((codigo!=FINAL_FICHERO)&&(codigo!=RETURN)) {
-            linea.adicionCaracter(codigo);
+            linea.añadirCaracter(codigo);
             codigo=BufferedFicheroIn.read();
         }
         return linea;
