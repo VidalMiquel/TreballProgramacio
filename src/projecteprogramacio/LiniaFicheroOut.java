@@ -17,7 +17,7 @@ public class LiniaFicheroOut {
     }
     
     public void escrituraLinia(Linia linia)throws IOException{
-        for(int i = 0; i<linia.getNumeroCaracteres(); i++){
+        for(int i = 0; i<linia.getNumCaracteres(); i++){
             BufferedFicheroOut.write(linia.obtenerCaracter(i));
         }
     }

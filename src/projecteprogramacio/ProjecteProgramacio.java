@@ -56,7 +56,7 @@ public class ProjecteProgramacio {
                     break;
                 case 4:
                     Palabra aux;
-                     PalabraFicheroIn palFicheroIn1 = new PalabraFicheroIn("fitxer.txt");
+                    PalabraFicheroIn palFicheroIn1 = new PalabraFicheroIn("fitxer.txt");
                     System.out.println("OPCION BUSCAR UNA PALABRA EN EL FICHERO:");
                     System.out.println("PALABRA A BUSCAR:");
                     String palabra = LT.readLine();
@@ -77,6 +77,29 @@ public class ProjecteProgramacio {
                     System.out.println("OPCIÓN 6");
                     break;
                 case 7:
+ 
+                    LiniaFicheroIn fichero = new LiniaFicheroIn("fitxer.txt");
+                    LiniaFicheroOut ficheroCod = new LiniaFicheroOut("fitxerCod.txt");
+                    System.out.print("SEMILLA: ");
+                    int semilla = LT.readInt();
+                    CodificacionAlfabetica cod = new CodificacionAlfabetica(semilla);
+                    Linia secuencia;
+                    Linia auxiliar;
+                    int codigo;
+                    while(fichero.hayLineas()){
+                        auxiliar = new Linia();
+                        secuencia = fichero.lectura();
+                        
+                        for(int i = 0; i<secuencia.getNumCaracteres();i++){
+                            codigo =(char)cod.codificar(secuencia.obtenerCaracter(i));
+                            auxiliar.adicionCaracter(codigo);
+                        
+                        }
+                            ficheroCod.escrituraLinia(auxiliar);
+                           // ficheroCod.nuevaLinea();
+                    }
+                    fichero.cerrarFichero();
+                    ficheroCod.cerrarFichero();
                     System.out.println("OPCIÓN 7");
                     break;
                 case 8:

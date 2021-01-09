@@ -17,24 +17,19 @@ public class LiniaFicheroIn{
         FileFicheroIn = new FileReader(nom);
         BufferedFicheroIn = new BufferedReader(FileFicheroIn);
     } 
-    public boolean hayLineas() throws Exception {
-        if (codigo==SALTO_LINEA) {
-            codigo=BufferedFicheroIn.read();
-        }
-        else {
-            codigo=BufferedFicheroIn.read();
-            codigo=BufferedFicheroIn.read();
-        }
+        public boolean hayLineas() throws Exception {
+        //lectura código de caracter desde el fichero
+        codigo=BufferedFicheroIn.read();
         return (codigo!=FINAL_FICHERO); 
     }
-    
     public Linia lectura() throws Exception {
         Linia linea=new Linia();
         if (codigo==RETURN) {
+            codigo=BufferedFicheroIn.read();
             return linea;
         }  
-        while ((codigo!=FINAL_FICHERO)&&(codigo!=RETURN)&&(codigo!=SALTO_LINEA)) {
-            linea.añadirCaracter(codigo);
+        while ((codigo!=FINAL_FICHERO)&&(codigo!=RETURN)) {
+            linea.adicionCaracter(codigo);
             codigo=BufferedFicheroIn.read();
         }
         return linea;
