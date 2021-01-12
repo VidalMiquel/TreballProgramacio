@@ -16,11 +16,16 @@ public class PalabraFicheroIn {
     private int linea;
     private int columna;
 
-    public PalabraFicheroIn(String nombreFichero) throws Exception {
+    public PalabraFicheroIn(String nombreFichero){
         
-        
+        try{
         FileFicheroIn = new FileReader(nombreFichero);
-        BufferedFicheroIn = new BufferedReader(FileFicheroIn);  
+        BufferedFicheroIn = new BufferedReader(FileFicheroIn);   
+        }catch(IOException ex){
+            System.out.println("El fichero deseado no existe. Ninguna opción del menu es aplicable");
+        }
+        
+   
        
        
     }

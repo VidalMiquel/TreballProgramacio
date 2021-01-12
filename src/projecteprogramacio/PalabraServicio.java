@@ -1,6 +1,7 @@
 package projecteprogramacio;
 
 public class PalabraServicio {
+
     private static final int NUMERO_MAXIMO_PALABRAS = 500;
     private static final char[] alfabeto = "abcdefghijklmnñopqrstuvwxyz".toCharArray();
     Palabra[] Palabras;
@@ -9,8 +10,8 @@ public class PalabraServicio {
     int numeroPalabras;
     int numeroCaracteres;
     private boolean primeraColocada = false;
-    
-     public PalabraServicio() throws Exception{
+
+    public PalabraServicio() throws Exception {
         Palabras = new Palabra[500];
         inicilaitzarArrayPalabras();
         contadorCaracteres = new int[alfabeto.length];
@@ -19,13 +20,13 @@ public class PalabraServicio {
         numeroCaracteres = 0;
 
     }
-    
-    private void inicilaitzarArrayPalabras(){
-        for(int i = 0; i<Palabras.length;i++){
-            Palabras[i]= new Palabra();
+
+    private void inicilaitzarArrayPalabras() {
+        for (int i = 0; i < Palabras.length; i++) {
+            Palabras[i] = new Palabra();
         }
     }
-    
+
     //INCREMENTAR ARRAY CONTADOR CARACTER PARA SABER CUAL ES EL MAS REPETIDO
     public void incrementarContadorCaracteres(char caracter) {
         for (int i = 0; i < alfabeto.length; i++) {
@@ -98,7 +99,7 @@ public class PalabraServicio {
         }
 
     }
-    
+
     //Imprimir por pantalla la palabra que aparece mas veces en el fichero
     public String palabraMasRepetidatoString() {
 
@@ -119,37 +120,37 @@ public class PalabraServicio {
         return salida;
 
     }
-    
-    public void imprimirNumeroCaractersArrayparaula(){
-        for(int i = 0; i<Palabras.length;i++){
+
+    public void imprimirNumeroCaractersArrayparaula() {
+        for (int i = 0; i < Palabras.length; i++) {
             System.out.println(Palabras[i].getNumeroCaracteres());
         }
     }
-    
+
     //incrementar Arry Palabrs y contadorPalabras
-    public void incrementarContadorPalabras(Palabra palabra){
+    public void incrementarContadorPalabras(Palabra palabra) {
 
         boolean acabat = false;
-        for(int i = 0; i< Palabras.length&&!acabat;i++){
-            
-            if(!primeraColocada){
-              Palabras[i] = palabra;
-              contadorPalabras[i]++;
-              primeraColocada = true;
-              acabat = true;
-            }else if(sonIguales(palabra, i)){
+        for (int i = 0; i < Palabras.length && !acabat; i++) {
+
+            if (!primeraColocada) {
+                Palabras[i] = palabra;
+                contadorPalabras[i]++;
+                primeraColocada = true;
+                acabat = true;
+            } else if (sonIguales(palabra, i)) {
                 contadorPalabras[i]++;
                 acabat = true;
-            }else if(Palabras[i].vacia()){
-                 Palabras[i] = palabra;
-                 contadorPalabras[i]++;
-                 acabat = true;
-             }
+            } else if (Palabras[i].vacia()) {
+                Palabras[i] = palabra;
+                contadorPalabras[i]++;
+                acabat = true;
             }
         }
-    
+    }
+
     //Compara si dos palabras pasadas por parametro son iguales
-    public boolean sonIguales(Palabra palabra, Palabra auxiliar) {
+    public boolean sonPalabrasIguales(Palabra palabra, Palabra auxiliar) {
 
         if (palabra.getNumeroCaracteres() == auxiliar.getNumeroCaracteres()) {
             for (int j = 0; j < palabra.getNumeroCaracteres(); j++) {
@@ -163,13 +164,13 @@ public class PalabraServicio {
         }
 
     }
-    
-      public String imprimirLugarExacto(Palabra palabra){
-        
+
+    public String imprimirLugarExacto(Palabra palabra) {
+
         String salida = "";
-        salida = salida + "LA PALABRA " + palabra.toString() + " APARECE EN LA LINIA " +
-                palabra.getLinea() + " Y LA COLUMNA " + palabra.getColumna();
-        
+        salida = salida + "LA PALABRA " + palabra.toString() + " APARECE EN LA LINIA "
+                + palabra.getLinea() + " Y LA COLUMNA " + palabra.getColumna();
+
         return salida;
     }
 
