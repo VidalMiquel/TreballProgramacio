@@ -64,4 +64,27 @@ public class Linia {
     public boolean vacia() {
         return (numeroCaracteres==0);
     }
+    
+    public boolean contienePalabra(Linia a) {
+      
+        if (numeroCaracteres>=a.numeroCaracteres) {
+            for (int indice=0;indice<numeroCaracteres;indice++) {
+                if ((numeroCaracteres-indice)>=a.numeroCaracteres) {
+                    boolean contenida=true;
+                    for (int indice2=0;indice2<a.numeroCaracteres;indice2++) {
+                        if (caracteres[indice+indice2]!=a.caracteres[indice2]) {
+                            contenida=false;
+                        }
+                    }
+                    if (contenida) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        else {
+            return false;
+        }
+    }
 }

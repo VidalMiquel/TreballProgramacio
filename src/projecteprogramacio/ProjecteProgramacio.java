@@ -1,6 +1,5 @@
 package projecteprogramacio;
 
-import java.io.File;
 
 public class ProjecteProgramacio {
 
