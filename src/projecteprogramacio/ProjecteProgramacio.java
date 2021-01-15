@@ -124,7 +124,9 @@ public class ProjecteProgramacio {
                 case 8:
                     LiniaFicheroIn ficheroCodi = new LiniaFicheroIn("fitxerCod.txt");
                     LiniaFicheroOut ficheroDec = new LiniaFicheroOut("fitxerDecod.txt");
-                    cod = new CodificacionAlfabetica(5);
+                    System.out.print("SEMILLA: ");
+                    semilla = LT.readInt();
+                    cod = new CodificacionAlfabetica(semilla);
                     Linia secuenciaCod;
                     Linia auxi;
                     int codi;
