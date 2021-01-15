@@ -133,6 +133,7 @@ public class ProjecteProgramacio {
                     while (ficheroCodi.hayLineas()) {
                         auxi = new Linia();
                         secuenciaCod = ficheroCodi.lectura();
+                        System.out.println(secuenciaCod.getNumeroCaracteres());
                         for (int i = 0; i < secuenciaCod.getNumeroCaracteres(); i++) {
                             codi = (char) cod.deCodificar(secuenciaCod.obtenerCaracter(i));
                             auxi.añadirCaracter(codi);
