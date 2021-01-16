@@ -18,15 +18,15 @@ public LiniaServicio(){
     
     
     
-    /*
+    
+    //ACABAR DE FER FALTA SA LINIA I SA COLUMNA EXACTE, AIXO ES TEMA LLER LINIA
     public String imprimirLugarExacto(Linia linia) {
 
         String salida = "";
-        salida = salida + "LA PALABRA " + linia+ " APARECE EN LA LINIA "
-                + linia.getLinia() " Y LA COLUMNA " + palabra.getColumna();
+        salida = salida + "LA PALABRA " + linia+ " APARECE EN LA LINIA ";
 
         return salida;
     }
 
-*/
+
 }

@@ -18,6 +18,11 @@ public class Linia {
         numeroCaracteres=0;
     }
     
+    public Linia(String texto){
+        caracteres = texto.toCharArray();
+        numeroCaracteres = texto.length();
+    }
+    
     //Métodos funcionales
     //método que lleva a cabo la verificación de si una objeto Linea ha sido
     //totalmente leido desde el teclado
