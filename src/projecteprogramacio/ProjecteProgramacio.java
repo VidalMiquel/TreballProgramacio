@@ -1,6 +1,5 @@
 package projecteprogramacio;
 
-
 public class ProjecteProgramacio {
 
     public static void main(String[] args) throws Exception {
@@ -27,9 +26,12 @@ public class ProjecteProgramacio {
             int opcioMenu = LT.readInt();
             switch (opcioMenu) {
                 case 0:
+                    
                     sortir = true;
                     break;
+                    
                 case 1:
+                    
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     while (palFicheroIn.hayPalabras()) {
@@ -43,7 +45,9 @@ public class ProjecteProgramacio {
                     palFicheroIn.cerraFichero();
                     System.out.println(anal.caracterMasRepetidotoString());
                     break;
+                    
                 case 2:
+                    
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     while (palFicheroIn.hayPalabras()) {
@@ -56,7 +60,9 @@ public class ProjecteProgramacio {
                     palFicheroIn.cerraFichero();
                     System.out.println(anal.numeroAparcicionesCaractertoString());
                     break;
+                    
                 case 3:
+                    
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     while (palFicheroIn.hayPalabras()) {
@@ -66,7 +72,9 @@ public class ProjecteProgramacio {
                     palFicheroIn.cerraFichero();
                     System.out.println(anal.palabraMasRepetidatoString());
                     break;
+                    
                 case 4:
+                    
                     Palabra aux;
                     anal = new PalabraServicio();
                     PalabraFicheroIn palFicheroIn1 = new PalabraFicheroIn(nombreFichero);
@@ -83,9 +91,24 @@ public class ProjecteProgramacio {
                     }
                     palFicheroIn.cerraFichero();
                     break;
+
                 case 5:
-                    System.out.println("OPCIÓN 5");
+                    
+                    System.out.println("TEXT A CERCAR: MAXIM 250 CARACTERS");
+                    String texto = LT.readLine();
+                    Linia secuenciaBuscada = new Linia(texto);
+                    Linia secuenciaLeida;
+                    LiniaFicheroIn fich = new LiniaFicheroIn(nombreFichero);
+                    LiniaServicio analL = new LiniaServicio();
+
+                    while (fich.hayLineas()) {
+                        secuenciaLeida = fich.lectura();
+                        if (secuenciaLeida.contienePalabra(secuenciaBuscada)) {
+                            System.out.println(analL.imprimirLugarExacto(secuenciaBuscada));
+                        }
+                    }
                     break;
+                    
                 case 6:
                     
                     anal = new PalabraServicio();
@@ -99,6 +122,7 @@ public class ProjecteProgramacio {
                         }
                     }
                     break;
+                    
                 case 7:
 
                     LiniaFicheroIn fichero = new LiniaFicheroIn(nombreFichero);
@@ -117,28 +141,31 @@ public class ProjecteProgramacio {
                             auxiliar.añadirCaracter(codigo);
                         }
                         ficheroCod.escrituraLinia(auxiliar);
+                        ficheroCod.nuevaLinea();
                     }
                     fichero.cerrarFichero();
                     ficheroCod.cerrarFichero();
                     break;
+                    
                 case 8:
+                    
                     LiniaFicheroIn ficheroCodi = new LiniaFicheroIn("fitxerCod.txt");
                     LiniaFicheroOut ficheroDec = new LiniaFicheroOut("fitxerDecod.txt");
                     System.out.print("SEMILLA: ");
                     semilla = LT.readInt();
                     cod = new CodificacionAlfabetica(semilla);
                     Linia secuenciaCod;
-                    Linia auxi;
+                    Linia ayuda;
                     int codi;
                     while (ficheroCodi.hayLineas()) {
-                        auxi = new Linia();
+                        ayuda = new Linia();
                         secuenciaCod = ficheroCodi.lectura();
-                        System.out.println(secuenciaCod.getNumeroCaracteres());
                         for (int i = 0; i < secuenciaCod.getNumeroCaracteres(); i++) {
                             codi = (char) cod.deCodificar(secuenciaCod.obtenerCaracter(i));
-                            auxi.añadirCaracter(codi);
+                            ayuda.añadirCaracter(codi);
                         }
-                        ficheroDec.escrituraLinia(auxi);
+                        ficheroDec.escrituraLinia(ayuda);
+
                     }
                     ficheroCodi.cerrarFichero();
                     ficheroDec.cerrarFichero();

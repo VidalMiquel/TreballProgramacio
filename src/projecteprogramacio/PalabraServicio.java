@@ -114,8 +114,8 @@ public class PalabraServicio {
         }
 
         salida = salida + "PALABRA MÁS REPETIDA ES: "
-                + pal.toString() + "CON"
-                + palabraMasRepetida + "APARICIONES";
+                + pal.toString() + " CON "
+                + palabraMasRepetida + " APARICIONES";
 
         return salida;
 

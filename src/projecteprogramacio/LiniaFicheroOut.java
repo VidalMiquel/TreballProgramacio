@@ -23,7 +23,6 @@ public class LiniaFicheroOut {
     }
     
      public void nuevaLinea() throws Exception {
-        BufferedFicheroOut.write(RETURN);
         BufferedFicheroOut.write(SALTO_LINEA);
     }
      
