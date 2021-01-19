@@ -12,6 +12,8 @@ public class LiniaFicheroIn{
     private static final int RETURN=(int) '\r';
     private static final int SALTO_LINEA=(int) '\n';  
     private int codigo=SALTO_LINEA;
+     private int linia;
+    private int columna;
     
     public LiniaFicheroIn(String nom) throws IOException{
         FileFicheroIn = new FileReader(nom);
@@ -27,12 +29,28 @@ public class LiniaFicheroIn{
             codigo=BufferedFicheroIn.read();
             return linea;
         }  
+        boolean asignacionPosicion = false;
         while ((codigo!=FINAL_FICHERO)&&(codigo!=RETURN)) {
+             if (!asignacionPosicion) {
+                linea.putLinea(linia);
+                linea.putColumna(columna);
+                asignacionPosicion = true;
+            }
+            actualizacionLineaColumna();
             linea.añadirCaracter(codigo);
             codigo=BufferedFicheroIn.read();
         }
         return linea;
     }
+    public void actualizacionLineaColumna() {
+        if (codigo == SALTO_LINEA) {
+            linia++;
+            columna = 1;
+        } else {
+            columna++;
+        }
+    }
+    
     public void cerrarFichero ()throws IOException{
         BufferedFicheroIn.close();
     }

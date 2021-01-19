@@ -9,6 +9,8 @@ public class Linia {
     private char [] caracteres=new char[MAXIMO];  
     private int numeroCaracteres;   
     private static char caracter;
+    private int linia=0;
+    private int columna=0;
     
     
     //MÉTODOS
@@ -91,5 +93,21 @@ public class Linia {
         else {
             return false;
         }
+    }
+    
+      public int getLinea() {
+        return linia;
+    }
+
+    public void putLinea(int linea) {
+        this.linia = linea;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public void putColumna(int columna) {
+        this.columna = columna;
     }
 }
