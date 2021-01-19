@@ -104,7 +104,7 @@ public class ProjecteProgramacio {
                     while (fich.hayLineas()) {
                         secuenciaLeida = fich.lectura();
                         if (secuenciaLeida.contienePalabra(secuenciaBuscada)) {
-                            System.out.println(analL.imprimirLugarExacto(secuenciaBuscada));
+                            System.out.println(analL.imprimirLugarExacto(secuenciaLeida));
                         }
                     }
                     break;

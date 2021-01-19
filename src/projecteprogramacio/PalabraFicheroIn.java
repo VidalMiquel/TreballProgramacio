@@ -24,10 +24,6 @@ public class PalabraFicheroIn {
         }catch(IOException ex){
             System.out.println("El fichero deseado no existe. Ninguna opción del menu es aplicable");
         }
-        
-   
-       
-       
     }
 
     public void cerraFichero() throws Exception {
