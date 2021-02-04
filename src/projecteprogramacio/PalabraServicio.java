@@ -84,6 +84,10 @@ public class PalabraServicio {
         return numeroCaracteres;
     }
 
+    public static int getNUMERO_MAXIMO_PALABRAS() {
+        return NUMERO_MAXIMO_PALABRAS;
+    }
+
     //Comprovar que la palabra leida no esta en la array Palabras
     private boolean sonIguales(Palabra palabra, int i) {
 
@@ -136,6 +140,7 @@ public class PalabraServicio {
             if (!primeraColocada) {
                 Palabras[i] = palabra;
                 contadorPalabras[i]++;
+                numeroPalabras++;
                 primeraColocada = true;
                 acabat = true;
             } else if (sonIguales(palabra, i)) {
@@ -144,6 +149,7 @@ public class PalabraServicio {
             } else if (Palabras[i].vacia()) {
                 Palabras[i] = palabra;
                 contadorPalabras[i]++;
+                numeroPalabras++;
                 acabat = true;
             }
         }

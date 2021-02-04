@@ -1,5 +1,7 @@
 package projecteprogramacio;
 
+import java.io.FileNotFoundException;
+
 public class ProjecteProgramacio {
 
     public static void main(String[] args) throws Exception {
@@ -15,9 +17,25 @@ public class ProjecteProgramacio {
         Palabra pal;
         System.out.println("NOMBRE DEL FICHERO A ANALIZAR: ");
         String nombreFichero = LT.readLine();
-        PalabraFicheroIn palFicheroIn = new PalabraFicheroIn(nombreFichero);
-        palFicheroIn.cerraFichero();
+        PalabraFicheroIn palFicheroIn;
         PalabraServicio anal;
+        try {
+            palFicheroIn = new PalabraFicheroIn(nombreFichero);
+            anal = new PalabraServicio();
+            palFicheroIn = new PalabraFicheroIn(nombreFichero);
+            while (palFicheroIn.hayPalabras()) {
+                pal = palFicheroIn.lectura();
+                anal.incrementarContadorPalabras(pal);
+            }
+            if (!(anal.numeroPalabras<PalabraServicio.getNUMERO_MAXIMO_PALABRAS())){
+                System.out.println("El fichero contiene demasiadas palabras diferentes. Limite: "+PalabraServicio.getNUMERO_MAXIMO_PALABRAS());
+                sortir = true;
+            }
+            palFicheroIn.cerraFichero();
+        } catch (FileNotFoundException ex) {
+            System.out.println("El fichero deseado no existe. Ninguna opción del menu es aplicable");
+            sortir = true;
+        }
         CodificacionAlfabetica cod;
         while (!sortir) {
             borrarPantalla();
@@ -26,12 +44,12 @@ public class ProjecteProgramacio {
             int opcioMenu = LT.readInt();
             switch (opcioMenu) {
                 case 0:
-                    
+
                     sortir = true;
                     break;
-                    
+
                 case 1:
-                    
+
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     while (palFicheroIn.hayPalabras()) {
@@ -45,9 +63,9 @@ public class ProjecteProgramacio {
                     palFicheroIn.cerraFichero();
                     System.out.println(anal.caracterMasRepetidotoString());
                     break;
-                    
+
                 case 2:
-                    
+
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     while (palFicheroIn.hayPalabras()) {
@@ -60,9 +78,9 @@ public class ProjecteProgramacio {
                     palFicheroIn.cerraFichero();
                     System.out.println(anal.numeroAparcicionesCaractertoString());
                     break;
-                    
+
                 case 3:
-                    
+
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     while (palFicheroIn.hayPalabras()) {
@@ -72,19 +90,19 @@ public class ProjecteProgramacio {
                     palFicheroIn.cerraFichero();
                     System.out.println(anal.palabraMasRepetidatoString());
                     break;
-                    
+
                 case 4:
-                    
+
                     Palabra aux;
                     anal = new PalabraServicio();
-                    PalabraFicheroIn palFicheroIn1 = new PalabraFicheroIn(nombreFichero);
+                    palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     System.out.println("OPCION BUSCAR UNA PALABRA EN EL FICHERO:");
                     System.out.println("PALABRA A BUSCAR:");
                     String palabra = LT.readLine();
                     aux = new Palabra(palabra);
                     System.out.println("LA PALABRA BUSCADA ES: " + aux);
-                    while (palFicheroIn1.hayPalabras()) {
-                        pal = palFicheroIn1.lectura();
+                    while (palFicheroIn.hayPalabras()) {
+                        pal = palFicheroIn.lectura();
                         if (anal.sonPalabrasIguales(pal, aux)) {
                             System.out.println(anal.imprimirLugarExacto(pal));
                         }
@@ -93,7 +111,7 @@ public class ProjecteProgramacio {
                     break;
 
                 case 5:
-                    
+
                     System.out.println("TEXT A CERCAR: MAXIM 250 CARACTERS");
                     String texto = LT.readLine();
                     Linia secuenciaBuscada = new Linia(texto);
@@ -108,9 +126,9 @@ public class ProjecteProgramacio {
                         }
                     }
                     break;
-                    
+
                 case 6:
-                    
+
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     pal = palFicheroIn.lectura();
@@ -122,7 +140,7 @@ public class ProjecteProgramacio {
                         }
                     }
                     break;
-                    
+
                 case 7:
 
                     LiniaFicheroIn fichero = new LiniaFicheroIn(nombreFichero);
@@ -146,9 +164,9 @@ public class ProjecteProgramacio {
                     fichero.cerrarFichero();
                     ficheroCod.cerrarFichero();
                     break;
-                    
+
                 case 8:
-                    
+
                     LiniaFicheroIn ficheroCodi = new LiniaFicheroIn("fitxerCod.txt");
                     LiniaFicheroOut ficheroDec = new LiniaFicheroOut("fitxerDecod.txt");
                     System.out.print("SEMILLA: ");
