@@ -23,8 +23,8 @@ public LiniaServicio(){
     public String imprimirLugarExacto(Linia linia) {
 
         String salida = "";
-        salida = salida + "LA LINIA " + linia + " APARECE EN LA LINIA " 
-                + linia.getLinea() + " Y LA COLUMNA " + linia.getColumna();
+        salida = salida + " APARECE EN LA LINIA " 
+                + (linia.getLinea()+1) + " Y LA COLUMNA " + linia.getColumna();
 
         return salida;
     }

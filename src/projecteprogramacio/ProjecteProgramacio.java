@@ -3,17 +3,17 @@ package projecteprogramacio;
 import java.io.FileNotFoundException;
 
 public class ProjecteProgramacio {
-
+    
     public static void main(String[] args) throws Exception {
         new ProjecteProgramacio().ProgramaPrincipal();
-
+        
     }
-
+    
     public void ProgramaPrincipal() throws Exception {
         boolean sortir = false;
         int semilla;
         char caracter;
-
+        
         Palabra pal;
         System.out.println("NOMBRE DEL FICHERO A ANALIZAR: ");
         String nombreFichero = LT.readLine();
@@ -29,8 +29,8 @@ public class ProjecteProgramacio {
                 pal = palFicheroIn.lectura();
                 anal.incrementarContadorPalabras(pal);
             }
-            if (!(anal.numeroPalabras<PalabraServicio.getNUMERO_MAXIMO_PALABRAS())){
-                System.out.println("El fichero contiene demasiadas palabras diferentes. Limite: "+PalabraServicio.getNUMERO_MAXIMO_PALABRAS());
+            if (!(anal.numeroPalabras < PalabraServicio.getNUMERO_MAXIMO_PALABRAS())) {
+                System.out.println("El fichero contiene demasiadas palabras diferentes. Limite: " + PalabraServicio.getNUMERO_MAXIMO_PALABRAS());
                 sortir = true;
             }
             analisis.analisis(nombreFichero);
@@ -47,12 +47,12 @@ public class ProjecteProgramacio {
             int opcioMenu = LT.readInt();
             switch (opcioMenu) {
                 case 0:
-
+                    
                     sortir = true;
                     break;
-
+                
                 case 1:
-
+                    
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     while (palFicheroIn.hayPalabras()) {
@@ -61,14 +61,14 @@ public class ProjecteProgramacio {
                             caracter = pal.obtenerCaracter(i);
                             anal.incrementarContadorCaracteres(caracter);
                         }
-
+                        
                     }
                     palFicheroIn.cerrarFichero();
                     System.out.println(anal.caracterMasRepetidotoString());
                     break;
-
+                
                 case 2:
-
+                    
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     while (palFicheroIn.hayPalabras()) {
@@ -81,9 +81,9 @@ public class ProjecteProgramacio {
                     palFicheroIn.cerrarFichero();
                     System.out.println(anal.numeroAparcicionesCaractertoString());
                     break;
-
+                
                 case 3:
-
+                    
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     while (palFicheroIn.hayPalabras()) {
@@ -93,9 +93,9 @@ public class ProjecteProgramacio {
                     palFicheroIn.cerrarFichero();
                     System.out.println(anal.palabraMasRepetidatoString());
                     break;
-
+                
                 case 4:
-
+                    
                     Palabra aux;
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
@@ -112,26 +112,26 @@ public class ProjecteProgramacio {
                     }
                     palFicheroIn.cerrarFichero();
                     break;
-
+                
                 case 5:
-
+                    
                     System.out.println("TEXT A CERCAR: MAXIM 250 CARACTERS");
                     String texto = LT.readLine();
                     Linia secuenciaBuscada = new Linia(texto);
                     Linia secuenciaLeida;
                     LiniaFicheroIn fich = new LiniaFicheroIn(nombreFichero);
                     LiniaServicio analL = new LiniaServicio();
-
+                    
                     while (fich.hayLineas()) {
                         secuenciaLeida = fich.lectura();
                         if (secuenciaLeida.contienePalabra(secuenciaBuscada)) {
-                            System.out.println(analL.imprimirLugarExacto(secuenciaLeida));
+                            System.out.println("LA LINIA: "+secuenciaBuscada+analL.imprimirLugarExacto(secuenciaLeida));
                         }
                     }
                     break;
-
+                
                 case 6:
-
+                    
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     pal = palFicheroIn.lectura();
@@ -143,11 +143,11 @@ public class ProjecteProgramacio {
                         }
                     }
                     break;
-
+                
                 case 7:
-
+                    
                     LiniaFicheroIn fichero = new LiniaFicheroIn(nombreFichero);
-                    LiniaFicheroOut ficheroCod = new LiniaFicheroOut("fitxerCod.txt");
+                    LiniaFicheroOut ficheroCod = new LiniaFicheroOut(nombreFichero+".cod.txt");
                     System.out.print("SEMILLA: ");
                     semilla = LT.readInt();
                     cod = new CodificacionAlfabetica(semilla);
@@ -167,11 +167,11 @@ public class ProjecteProgramacio {
                     fichero.cerrarFichero();
                     ficheroCod.cerrarFichero();
                     break;
-
+                
                 case 8:
-
-                    LiniaFicheroIn ficheroCodi = new LiniaFicheroIn("fitxerCod.txt");
-                    LiniaFicheroOut ficheroDec = new LiniaFicheroOut("fitxerDecod.txt");
+                    
+                    LiniaFicheroIn ficheroCodi = new LiniaFicheroIn(nombreFichero+".cod.txt");
+                    LiniaFicheroOut ficheroDec = new LiniaFicheroOut(nombreFichero+".decod.txt");
                     System.out.print("SEMILLA: ");
                     semilla = LT.readInt();
                     cod = new CodificacionAlfabetica(semilla);
@@ -186,15 +186,15 @@ public class ProjecteProgramacio {
                             ayuda.añadirCaracter(codi);
                         }
                         ficheroDec.escrituraLinia(ayuda);
-
+                        
                     }
                     ficheroCodi.cerrarFichero();
                     ficheroDec.cerrarFichero();
             }
-
+            
         }
     }
-
+    
     public void menu() {
         System.out.println("-------------------------------------------------");
         System.out.println("MENU DE OPCIONES: ");
@@ -208,11 +208,11 @@ public class ProjecteProgramacio {
         System.out.println("8.DECODIFICAR UN FICHERO");
         System.out.println("0.SALIR DEL PROGRAMA");
         System.out.println("-------------------------------------------------");
-
+        
     }
-
+    
     public static void borrarPantalla() {
         System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
-
+    
 }
