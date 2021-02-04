@@ -84,6 +84,7 @@ public class Linia {
                         }
                     }
                     if (contenida) {
+                        columna=indice;
                         return true;
                     }
                 }

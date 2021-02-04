@@ -3,7 +3,7 @@ package projecteprogramacio;
 public class PalabraServicio {
 
     private static final int NUMERO_MAXIMO_PALABRAS = 500;
-    private static final char[] alfabeto = "abcdefghijklmnñopqrstuvwxyz".toCharArray();
+    private static final char[] alfabeto = "abcdefghijklmnopqrstuvwxyz".toCharArray();
     Palabra[] Palabras;
     int[] contadorCaracteres;
     int[] contadorPalabras;
@@ -84,6 +84,10 @@ public class PalabraServicio {
         return numeroCaracteres;
     }
 
+    public static int getNUMERO_MAXIMO_PALABRAS() {
+        return NUMERO_MAXIMO_PALABRAS;
+    }
+
     //Comprovar que la palabra leida no esta en la array Palabras
     private boolean sonIguales(Palabra palabra, int i) {
 
@@ -105,17 +109,19 @@ public class PalabraServicio {
 
         String salida = "";
         int palabraMasRepetida = 0;
-        Palabra pal = new Palabra();
         for (int i = 0; i < alfabeto.length; i++) {
             if (palabraMasRepetida < contadorPalabras[i]) {
                 palabraMasRepetida = contadorPalabras[i];
-                pal = Palabras[i];
             }
         }
-
-        salida = salida + "PALABRA MÁS REPETIDA ES: "
-                + pal.toString() + " CON "
-                + palabraMasRepetida + " APARICIONES";
+        for (int i = 0; i < alfabeto.length; i++) {
+            if (palabraMasRepetida == contadorPalabras[i]) {
+                salida = salida + "PALABRA MÁS REPETIDA ES: '"
+                        + Palabras[i].toString() + "' CON "
+                        + palabraMasRepetida + " APARICIONES"
+                        + "\n";
+            }
+        }
 
         return salida;
 
@@ -136,6 +142,7 @@ public class PalabraServicio {
             if (!primeraColocada) {
                 Palabras[i] = palabra;
                 contadorPalabras[i]++;
+                numeroPalabras++;
                 primeraColocada = true;
                 acabat = true;
             } else if (sonIguales(palabra, i)) {
@@ -144,6 +151,7 @@ public class PalabraServicio {
             } else if (Palabras[i].vacia()) {
                 Palabras[i] = palabra;
                 contadorPalabras[i]++;
+                numeroPalabras++;
                 acabat = true;
             }
         }

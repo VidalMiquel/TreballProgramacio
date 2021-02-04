@@ -1,6 +1,7 @@
 package projecteprogramacio;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -16,21 +17,16 @@ public class PalabraFicheroIn {
     private int linea;
     private int columna;
 
-    public PalabraFicheroIn(String nombreFichero){
-        
-        try{
+    public PalabraFicheroIn(String nombreFichero) throws FileNotFoundException {
         FileFicheroIn = new FileReader(nombreFichero);
-        BufferedFicheroIn = new BufferedReader(FileFicheroIn);   
-        }catch(IOException ex){
-            System.out.println("El fichero deseado no existe. Ninguna opción del menu es aplicable");
-        }
+        BufferedFicheroIn = new BufferedReader(FileFicheroIn);
     }
 
-    public void cerraFichero() throws Exception {
+    public void cerrarFichero() throws IOException {
         BufferedFicheroIn.close();
     }
 
-    public boolean hayPalabras() throws Exception {
+    public boolean hayPalabras() throws IOException {
         buscarPalabras();
         return (caracter != FINAL_FICHERO);
     }
@@ -42,7 +38,7 @@ public class PalabraFicheroIn {
                 || (caracter == '>'));
     }
 
-    private void buscarPalabras() throws Exception {
+    private void buscarPalabras() throws IOException {
         while ((caracter == ESPACIO) || (caracter == RETURN) || (caracter == SALTO_LINEA)
                 || (esSeparador(caracter))) {
             actualizacionLineaColumna();
@@ -50,7 +46,7 @@ public class PalabraFicheroIn {
         }
     }
 
-    public Palabra lectura() throws Exception {
+    public Palabra lectura() throws IOException {
 
         Palabra palabra = new Palabra();
 
