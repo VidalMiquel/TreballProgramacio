@@ -3,7 +3,7 @@ package projecteprogramacio;
 public class PalabraServicio {
 
     private static final int NUMERO_MAXIMO_PALABRAS = 500;
-    private static final char[] alfabeto = "abcdefghijklmnñopqrstuvwxyz".toCharArray();
+    private static final char[] alfabeto = "abcdefghijklmnopqrstuvwxyz".toCharArray();
     Palabra[] Palabras;
     int[] contadorCaracteres;
     int[] contadorPalabras;

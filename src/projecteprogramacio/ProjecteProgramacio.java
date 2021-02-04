@@ -19,10 +19,11 @@ public class ProjecteProgramacio {
         String nombreFichero = LT.readLine();
         PalabraFicheroIn palFicheroIn;
         PalabraServicio anal;
+        Analisis analisis = new Analisis();
+        
         try {
             palFicheroIn = new PalabraFicheroIn(nombreFichero);
             anal = new PalabraServicio();
-            palFicheroIn = new PalabraFicheroIn(nombreFichero);
             //Comprovamos que el fichero no exceda el limite de palabras diferentes
             while (palFicheroIn.hayPalabras()) {
                 pal = palFicheroIn.lectura();
@@ -32,7 +33,8 @@ public class ProjecteProgramacio {
                 System.out.println("El fichero contiene demasiadas palabras diferentes. Limite: "+PalabraServicio.getNUMERO_MAXIMO_PALABRAS());
                 sortir = true;
             }
-            palFicheroIn.cerraFichero();
+            analisis.analisis(nombreFichero);
+            palFicheroIn.cerrarFichero();
         } catch (FileNotFoundException ex) {
             System.out.println("El fichero deseado no existe. Ninguna opción del menu es aplicable");
             sortir = true;
@@ -61,7 +63,7 @@ public class ProjecteProgramacio {
                         }
 
                     }
-                    palFicheroIn.cerraFichero();
+                    palFicheroIn.cerrarFichero();
                     System.out.println(anal.caracterMasRepetidotoString());
                     break;
 
@@ -76,7 +78,7 @@ public class ProjecteProgramacio {
                             anal.incrementarContadorCaracteres(caracter);
                         }
                     }
-                    palFicheroIn.cerraFichero();
+                    palFicheroIn.cerrarFichero();
                     System.out.println(anal.numeroAparcicionesCaractertoString());
                     break;
 
@@ -88,7 +90,7 @@ public class ProjecteProgramacio {
                         pal = palFicheroIn.lectura();
                         anal.incrementarContadorPalabras(pal);
                     }
-                    palFicheroIn.cerraFichero();
+                    palFicheroIn.cerrarFichero();
                     System.out.println(anal.palabraMasRepetidatoString());
                     break;
 
@@ -108,7 +110,7 @@ public class ProjecteProgramacio {
                             System.out.println(anal.imprimirLugarExacto(pal));
                         }
                     }
-                    palFicheroIn.cerraFichero();
+                    palFicheroIn.cerrarFichero();
                     break;
 
                 case 5:
