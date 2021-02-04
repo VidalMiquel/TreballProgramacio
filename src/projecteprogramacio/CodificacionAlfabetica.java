@@ -5,8 +5,8 @@ import java.util.Random;
 
 public class CodificacionAlfabetica {
 
-    private static final int NUMERO_CARACTERES=27;
-    private static final char [] ALFABETO="abcdefghijklmnñopqrstuvwxyz".toCharArray();
+    private static final int NUMERO_CARACTERES=37;
+    private static final char [] ALFABETO="abcdefghijklmnopqrstuvwxyz.,:@?!\"()<>".toCharArray();
     private int desplazamiento;
     
 

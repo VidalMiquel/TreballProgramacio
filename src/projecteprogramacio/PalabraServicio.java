@@ -109,17 +109,19 @@ public class PalabraServicio {
 
         String salida = "";
         int palabraMasRepetida = 0;
-        Palabra pal = new Palabra();
         for (int i = 0; i < alfabeto.length; i++) {
             if (palabraMasRepetida < contadorPalabras[i]) {
                 palabraMasRepetida = contadorPalabras[i];
-                pal = Palabras[i];
             }
         }
-
-        salida = salida + "PALABRA MÁS REPETIDA ES: "
-                + pal.toString() + " CON "
-                + palabraMasRepetida + " APARICIONES";
+        for (int i = 0; i < alfabeto.length; i++) {
+            if (palabraMasRepetida == contadorPalabras[i]) {
+                salida = salida + "PALABRA MÁS REPETIDA ES: '"
+                        + Palabras[i].toString() + "' CON "
+                        + palabraMasRepetida + " APARICIONES"
+                        + "\n";
+            }
+        }
 
         return salida;
 
