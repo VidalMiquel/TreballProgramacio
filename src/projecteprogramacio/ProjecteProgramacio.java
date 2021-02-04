@@ -23,6 +23,7 @@ public class ProjecteProgramacio {
             palFicheroIn = new PalabraFicheroIn(nombreFichero);
             anal = new PalabraServicio();
             palFicheroIn = new PalabraFicheroIn(nombreFichero);
+            //Comprovamos que el fichero no exceda el limite de palabras diferentes
             while (palFicheroIn.hayPalabras()) {
                 pal = palFicheroIn.lectura();
                 anal.incrementarContadorPalabras(pal);
