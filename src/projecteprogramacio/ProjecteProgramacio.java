@@ -29,7 +29,7 @@ public class ProjecteProgramacio {
                 pal = palFicheroIn.lectura();
                 anal.incrementarContadorPalabras(pal);
             }
-            if (!(anal.numeroPalabras < PalabraServicio.getNUMERO_MAXIMO_PALABRAS())) {
+            if (!(anal.getNumeroPalabras() < PalabraServicio.getNUMERO_MAXIMO_PALABRAS())) {
                 System.out.println("El fichero contiene demasiadas palabras diferentes. Limite: " + PalabraServicio.getNUMERO_MAXIMO_PALABRAS());
                 sortir = true;
             }
@@ -120,12 +120,13 @@ public class ProjecteProgramacio {
                     Linia secuenciaBuscada = new Linia(texto);
                     Linia secuenciaLeida;
                     LiniaFicheroIn fich = new LiniaFicheroIn(nombreFichero);
-                    LiniaServicio analL = new LiniaServicio();
                     
                     while (fich.hayLineas()) {
                         secuenciaLeida = fich.lectura();
                         if (secuenciaLeida.contienePalabra(secuenciaBuscada)) {
-                            System.out.println("LA LINIA: "+secuenciaBuscada+analL.imprimirLugarExacto(secuenciaLeida));
+                            System.out.println("LA LINIA: "+
+                                    secuenciaBuscada.toString() + 
+                                    secuenciaBuscada.imprimirLugarExacto());
                         }
                     }
                     break;

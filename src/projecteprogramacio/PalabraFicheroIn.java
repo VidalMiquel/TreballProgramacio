@@ -6,7 +6,12 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class PalabraFicheroIn {
+    
+    /*
+    FUNCIONALITAT: lectura des de el fitxer especificat d'una linia.
+    */
 
+    //Declaracions dels atributs
     private BufferedReader BufferedFicheroIn = null;
     private FileReader FileFicheroIn = null;
     private static final int FINAL_FICHERO = -1;
@@ -17,11 +22,13 @@ public class PalabraFicheroIn {
     private int linea;
     private int columna;
 
+    //Constructor que inicialtza el FileReader i el BufferedReader.
     public PalabraFicheroIn(String nombreFichero) throws FileNotFoundException {
         FileFicheroIn = new FileReader(nombreFichero);
         BufferedFicheroIn = new BufferedReader(FileFicheroIn);
     }
 
+    //Mètode que tancar l'enllaç amb el fixter.
     public void cerrarFichero() throws IOException {
         BufferedFicheroIn.close();
     }
@@ -31,7 +38,7 @@ public class PalabraFicheroIn {
         return (caracter != FINAL_FICHERO);
     }
 
-    //revisar que aquets son els caracters que no alfabètics dins el fitxer
+    //Mètode que comprova si el caràcter llegit es un separador del fitxer.
     private boolean esSeparador(int caracter) {
         return ((caracter == ',') || (caracter == '.') || (caracter == ':') || (caracter == '@') || (caracter == '?')
                 || (caracter == '!') || (caracter == '"') || (caracter == '(') || (caracter == ')') || (caracter == '<')
@@ -68,7 +75,9 @@ public class PalabraFicheroIn {
         return palabra;
     }
 
-    public void actualizacionLineaColumna() {
+    //Mètode que  incrementa els atirbuts linia i columna, segons
+    //on es trobi la linia lletgida dins el fitxer.
+    private void actualizacionLineaColumna() {
         if (caracter == SALTO_LINEA) {
             linea++;
             columna = 1;
