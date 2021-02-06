@@ -5,10 +5,10 @@ public class PalabraServicio {
     private static final int NUMERO_MAXIMO_PALABRAS = 500;
     private static final char[] alfabeto = "abcdefghijklmnopqrstuvwxyz".toCharArray();
     Palabra[] Palabras;
-    int[] contadorCaracteres;
-    int[] contadorPalabras;
-    int numeroPalabras;
-    int numeroCaracteres;
+    private int[] contadorCaracteres;
+    private int[] contadorPalabras;
+    private int numeroPalabras;
+    private int numeroCaracteres;
     private boolean primeraColocada = false;
 
     public PalabraServicio() throws Exception {
