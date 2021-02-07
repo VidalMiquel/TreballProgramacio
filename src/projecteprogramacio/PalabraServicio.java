@@ -2,6 +2,7 @@ package projecteprogramacio;
 
 public class PalabraServicio {
 
+    //Declaracions dels atributs
     private static final int NUMERO_MAXIMO_PALABRAS = 500;
     private static final char[] alfabeto = "abcdefghijklmnopqrstuvwxyz".toCharArray();
     Palabra[] Palabras;
@@ -10,7 +11,8 @@ public class PalabraServicio {
     private int numeroPalabras;
     private int numeroCaracteres;
     private boolean primeraColocada = false;
-    //Metode Constructor
+    
+    //Constructor
     public PalabraServicio() throws Exception {
         Palabras = new Palabra[500];
         inicilaitzarArrayPalabras();
@@ -20,14 +22,14 @@ public class PalabraServicio {
         numeroCaracteres = 0;
 
     }
-    //Metode que inicializta l'array de paraules
+    //Mètode que inicializta l'array de paraules
     private void inicilaitzarArrayPalabras() {
         for (int i = 0; i < Palabras.length; i++) {
             Palabras[i] = new Palabra();
         }
     }
 
-    //INCREMENTAR ARRAY CONTADOR CARACTER PARA SABER CUAL ES EL MAS REPETIDO
+    //Incrementar l'array contadorCaracteres per saber quin es el més repetit.
     public void incrementarContadorCaracteres(char caracter) {
         for (int i = 0; i < alfabeto.length; i++) {
             if (alfabeto[i] == caracter) {
@@ -36,7 +38,7 @@ public class PalabraServicio {
         }
     }
 
-    //RIMPRIME EL CARACTER MAS REPETIDO 
+    //Mètode que retorna el caràcter mès repetit dins un String.
     public String caracterMasRepetidotoString() {
 
         String salida = "";
@@ -57,7 +59,8 @@ public class PalabraServicio {
         return salida;
     }
 
-    //IMPRIME LA FRECUENCIA DE LA APARICION DE LOS CARACTERES
+    //Mètode que retorna dins un string la freqüència d'aparició de cada caràcter
+    //alfàbetic.
     public String numeroAparcicionesCaractertoString() {
 
         String salida = "\n";
@@ -67,28 +70,19 @@ public class PalabraServicio {
         }
         return salida;
     }
-    //GETTERS i SETTERS
-    public void incrementarNumeroCaracteres() {
-        numeroCaracteres++;
-    }
-
-    public void incrementarNumeroPalabras() {
-        numeroPalabras++;
-    }
-
+    
+    //Getter de l'atribut numeroPalabras.
     public int getNumeroPalabras() {
         return numeroPalabras;
     }
 
-    public int getNumeroCaracteres() {
-        return numeroCaracteres;
-    }
-
+    
+    //Getter de l'atribut constant NUMERO_MAXIMO_PALABRAS.
     public static int getNUMERO_MAXIMO_PALABRAS() {
         return NUMERO_MAXIMO_PALABRAS;
     }
 
-    //Comprovar que la palabra leida no esta en la array Palabras
+    //Mètode que comprova si la paraula llegida és troba dins l'array Palabras.
     private boolean sonIguales(Palabra palabra, int i) {
 
         if (palabra.getNumeroCaracteres() == Palabras[i].getNumeroCaracteres()) {
@@ -104,7 +98,7 @@ public class PalabraServicio {
 
     }
 
-    //Imprimir por pantalla la palabra que aparece mas veces en el fichero
+    //Mètode que retorna un String amb la paraula més repetida.
     public String palabraMasRepetidatoString() {
 
         String salida = "";
@@ -127,7 +121,7 @@ public class PalabraServicio {
 
     }
 
-    //incrementar Arry Palabrs y contadorPalabras
+    //Incrementar l'array Palabas i l'atribut contadorPalabras.
     public void incrementarContadorPalabras(Palabra palabra) {
 
         boolean acabat = false;
@@ -151,7 +145,7 @@ public class PalabraServicio {
         }
     }
 
-    //Compara si dos palabras pasadas por parametro son iguales
+    //Mètode que comprova si dues paraules son iguals.
     public boolean sonPalabrasIguales(Palabra palabra, Palabra auxiliar) {
 
         if (palabra.getNumeroCaracteres() == auxiliar.getNumeroCaracteres()) {

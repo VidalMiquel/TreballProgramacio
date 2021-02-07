@@ -22,9 +22,12 @@ public class ProjecteProgramacio {
         Analisis analisis = new Analisis();
         
         try {
+            //Cmprovacions inicials del programa.
+            //Miram que el fitxer tengui menys de 500 paraules repetides.
+            //Recompte del numero de caràcters, paraules i lines.
+            //Imprimim per pantalla el resultats.
             palFicheroIn = new PalabraFicheroIn(nombreFichero);
             anal = new PalabraServicio();
-            //Comprovamos que el fichero no exceda el limite de palabras diferentes
             while (palFicheroIn.hayPalabras()) {
                 pal = palFicheroIn.lectura();
                 anal.incrementarContadorPalabras(pal);
@@ -51,12 +54,16 @@ public class ProjecteProgramacio {
             int opcioMenu = LT.readInt();
             switch (opcioMenu) {
                 case 0:
-                    
+                    //Sortir del while, fi del programa
                     sortir = true;
                     break;
                 
                 case 1:
-                    
+                    //Llegim una paraula del fitxer corresponent, la recorrem
+                    //caràcter a caràcter i incrementam contadorCaracteres 
+                    //segons el caràcter alfabètic llegit.
+                    //Imprimim per pantalla la lletra més repetida i el seu nombre
+                    //d'aparicions.
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     while (palFicheroIn.hayPalabras()) {
@@ -72,7 +79,11 @@ public class ProjecteProgramacio {
                     break;
                 
                 case 2:
-                    
+                    //Llegim una paraula del fitxer corresponent, la recorrem
+                    //caràcter a caràcter i incrementam contadorCaracteres 
+                    //segons el caràcter alfabètic llegit.
+                    //Imprimim per pantalla a freqüència d'aparició de cada
+                    //caràcter alfabètica.
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     while (palFicheroIn.hayPalabras()) {
@@ -87,7 +98,10 @@ public class ProjecteProgramacio {
                     break;
                 
                 case 3:
-                    
+                    //Llegim una paraula del fixter corresponent, comprovam si
+                    //ha estat llegida anteriorment, i incrementam contadorpalabras
+                    //segons la condicional explicada. 
+                    //Imprimim per pantalla la paraula més repetida dins el fitxer.
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     while (palFicheroIn.hayPalabras()) {
@@ -99,12 +113,16 @@ public class ProjecteProgramacio {
                     break;
                 
                 case 4:
-                    
+                    //Llegim una paraula des de teclat, i comprovam mitjançant 
+                    //la lectura d'una altra paraula des del fitxer si la
+                    //llegida des del teclat també és troba al fitxer.
+                    //Imprimim per pantalla, el lloc exacte on és troba la 
+                    //paraula cercada.
                     Palabra aux;
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     System.out.println("OPCION BUSCAR UNA PALABRA EN EL FICHERO:");
-                    System.out.println("PALABRA A BUSCAR:");
+                    System.out.println("PALABRA A BUSCAR: MÁXIMO 20 CARACTERES");
                     String palabra = LT.readLine();
                     aux = new Palabra(palabra);
                     System.out.println("LA PALABRA BUSCADA ES: " + aux);
@@ -118,8 +136,12 @@ public class ProjecteProgramacio {
                     break;
                 
                 case 5:
-                    
-                    System.out.println("TEXT A CERCAR: MAXIM 250 CARACTERS");
+                    //Llegim una linia des de teclat, i comprovam mitjançant 
+                    //la lectura d'una altra linia des del fitxer si la
+                    //llegida des del teclat també és troba al fitxer.
+                    //Imprimim per pantalla, el lloc exacte on és troba la 
+                    //linia cercada.
+                    System.out.println("TEXTO A BUSCAR: MÁXIMO 250 CARACTERES");
                     String texto = LT.readLine();
                     Linia secuenciaBuscada = new Linia(texto);
                     Linia secuenciaLeida;
@@ -136,7 +158,10 @@ public class ProjecteProgramacio {
                     break;
                 
                 case 6:
-                    
+                    //Llegim dues paraules des del fitxer, en cerca de si n'hi ha
+                    //de repetides.
+                    //Imprimim per pantalla el lloc exacte on es torba la paraula 
+                    //repetida.
                     anal = new PalabraServicio();
                     palFicheroIn = new PalabraFicheroIn(nombreFichero);
                     pal = palFicheroIn.lectura();
@@ -150,7 +175,11 @@ public class ProjecteProgramacio {
                     break;
                 
                 case 7:
-                    
+                    //Lectura d'una paraula des de fitxer, codificant-la 
+                    //caràcter a caràcter, i creació d'una posterior formada
+                    //pels caràcters codificats. 
+                    //Finalment, escriptura de la paraula nova codificada al 
+                    //fitxer especificat.
                     LiniaFicheroIn fichero = new LiniaFicheroIn(nombreFichero);
                     LiniaFicheroOut ficheroCod = new LiniaFicheroOut(nombreFichero+".cod.txt");
                     System.out.print("SEMILLA: ");
@@ -174,7 +203,11 @@ public class ProjecteProgramacio {
                     break;
                 
                 case 8:
-                    
+                    //Lectura d'una paraula des de fitxer, descodificant-la
+                    //caràcter a caràcter, i creació d'una posterior formada
+                    //pels caràcters descodificats.
+                    //Finalment, escriptura de la paraula nova descodificada al 
+                    //fitxer especificat.
                     LiniaFicheroIn ficheroCodi = new LiniaFicheroIn(nombreFichero+".cod.txt");
                     LiniaFicheroOut ficheroDec = new LiniaFicheroOut(nombreFichero+".decod.txt");
                     System.out.print("SEMILLA: ");
@@ -200,6 +233,7 @@ public class ProjecteProgramacio {
         }
     }
     
+    //Mètode per imprimir per pantalla el menu.
     public void menu() {
         System.out.println("-------------------------------------------------");
         System.out.println("MENU DE OPCIONES: ");
@@ -216,8 +250,10 @@ public class ProjecteProgramacio {
         
     }
     
+    //Mètode duu a terme el borrat de la pantalla per clarificar el resultat
+    //obtingut.
     public static void borrarPantalla() {
-        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.print("\n\n\n\n\n\n\n\n\n");
     }
     
 }
