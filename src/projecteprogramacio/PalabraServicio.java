@@ -165,7 +165,7 @@ public class PalabraServicio {
 
         String salida = "";
         salida = salida + "LA PALABRA " + palabra.toString() + " APARECE EN LA LINIA "
-                + palabra.getLinea() + " Y LA COLUMNA " + palabra.getColumna();
+                + (palabra.getLinea()+1) + " Y LA COLUMNA " + palabra.getColumna();
 
         return salida;
     }
