@@ -3,11 +3,18 @@ package projecteprogramacio;
 import java.io.*;
 
 public class Analisis {
+    //ATRIBUTS
+    private int palabras;
+    private int linias;
+    private int caracteres;
 
-    private int palabras = 0;
-    private int linias = 0;
-    private int caracteres = 0;
-
+    //Metode constructor
+    public Analisis() {
+        palabras = 0;
+        linias = 0;
+        caracteres = 0;
+    }
+    //Metode principal que s'encarrega d'imprimir l'informacio basica del fitxer 
     public void analisis(String nomFitxer) throws IOException {
         caracteres(nomFitxer);
         palabras(nomFitxer);
@@ -17,8 +24,8 @@ public class Analisis {
         System.out.println("Hi ha un total de " + palabras + " paraules");
         System.out.println("Hi ha un total de " + (linias + 1) + " linies");
     }
-
-    public void caracteres(String nombreFichero) throws IOException {
+    //Metode que conta el nombre de caracters del fitxer
+    private void caracteres(String nombreFichero) throws IOException {
         FileReader input;
 
         input = new FileReader(nombreFichero);
@@ -26,7 +33,7 @@ public class Analisis {
 
         int lectura = bufIn.read();
         while (lectura != -1) {
-            if (lectura >= ' ') { //Evitamos contabilizar los saltos de linia como caracteres
+            if (lectura >= ' ') { //Evitam contar els salts de linies com caracters
                 caracteres++;
             }
             lectura = bufIn.read();
@@ -34,8 +41,8 @@ public class Analisis {
         bufIn.close();
         input.close();
     }
-
-    public void linias(String nombreFichero) throws IOException {
+    //Metode que conta el nombre de linias del fitxer
+    private void linias(String nombreFichero) throws IOException {
         FileReader input;
 
         input = new FileReader(nombreFichero);
@@ -43,7 +50,7 @@ public class Analisis {
 
         int lectura = bufIn.read();
         while (lectura != -1) {
-            if (lectura == 10) {//El 10 es equivalente al salto de linia
+            if (lectura == 10) {//El 10 equival al salt de linia
                 linias++;
             }
             lectura = bufIn.read();
@@ -51,16 +58,21 @@ public class Analisis {
         bufIn.close();
         input.close();
     }
-
-    public void palabras(String nombreFichero) throws IOException {
+    //Metode que conta el nombre de paraules del fitxer
+    private void palabras(String nombreFichero) throws IOException {
         PalabraFicheroIn pi;
         pi = new PalabraFicheroIn(nombreFichero);
-        //leemos hasta quedarnos sin palabras
+        //Llegim fins quedarnos sense paraules
         while (pi.hayPalabras()) {
             pi.lectura();
             palabras++;
         }
-        //cerramos el archivo
+        //Tancam l'arxiu
         pi.cerrarFichero();
     }
+    //metode que retorna el nombre de caracters
+    public int getCaracteres() {
+        return caracteres;
+    }
+
 }

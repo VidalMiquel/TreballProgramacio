@@ -10,7 +10,7 @@ public class PalabraServicio {
     private int numeroPalabras;
     private int numeroCaracteres;
     private boolean primeraColocada = false;
-
+    //Metode Constructor
     public PalabraServicio() throws Exception {
         Palabras = new Palabra[500];
         inicilaitzarArrayPalabras();
@@ -20,7 +20,7 @@ public class PalabraServicio {
         numeroCaracteres = 0;
 
     }
-
+    //Metode que inicializta l'array de paraules
     private void inicilaitzarArrayPalabras() {
         for (int i = 0; i < Palabras.length; i++) {
             Palabras[i] = new Palabra();
@@ -67,7 +67,7 @@ public class PalabraServicio {
         }
         return salida;
     }
-
+    //GETTERS i SETTERS
     public void incrementarNumeroCaracteres() {
         numeroCaracteres++;
     }
@@ -127,12 +127,6 @@ public class PalabraServicio {
 
     }
 
-    public void imprimirNumeroCaractersArrayparaula() {
-        for (int i = 0; i < Palabras.length; i++) {
-            System.out.println(Palabras[i].getNumeroCaracteres());
-        }
-    }
-
     //incrementar Arry Palabrs y contadorPalabras
     public void incrementarContadorPalabras(Palabra palabra) {
 
@@ -172,7 +166,7 @@ public class PalabraServicio {
         }
 
     }
-
+    //Metode que retorna un String amb la localitzacio d'una paraula dins el fitxer
     public String imprimirLugarExacto(Palabra palabra) {
 
         String salida = "";

@@ -74,7 +74,7 @@ public class Linia {
                         }
                     }
                     if (contenida) {
-                        columna=indice;
+                        this.columna=indice;
                         return true;
                     }
                 }
@@ -109,7 +109,11 @@ public class Linia {
     
     //Mètode que retorna la posició exacte de la linia dins el fitxer
     public String imprimirLugarExacto() {
-
+        
+        if(this.linia!=0){
+            this.linia++;
+        }
+        
         String salida = "";
         salida = salida + " APARECE EN LA LINIA " 
                 + (this.linia+1) + " Y LA COLUMNA " + columna;
