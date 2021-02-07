@@ -22,12 +22,12 @@ public class LiniaFicheroIn {
         BufferedFicheroIn = new BufferedReader(FileFicheroIn);
     }
 
-    
+    //Metode que comprova si hi ha linies per llegir
     public boolean hayLineas() throws Exception {
         codigo = BufferedFicheroIn.read();
         return (codigo != FINAL_FICHERO);
     }
-
+    //Metode que llegeix linies
     public Linia lectura() throws Exception {
         Linia linea = new Linia();
         if (codigo == RETURN) {

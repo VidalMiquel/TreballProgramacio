@@ -34,6 +34,10 @@ public class ProjecteProgramacio {
                 sortir = true;
             }
             analisis.analisis(nombreFichero);
+            if (analisis.getCaracteres()==0){
+                sortir = true;
+                System.out.println("El fichero deseado esta vacio. Ninguna opción del menu es aplicable");
+            }
             palFicheroIn.cerrarFichero();
         } catch (FileNotFoundException ex) {
             System.out.println("El fichero deseado no existe. Ninguna opción del menu es aplicable");
@@ -126,7 +130,7 @@ public class ProjecteProgramacio {
                         if (secuenciaLeida.contienePalabra(secuenciaBuscada)) {
                             System.out.println("LA LINIA: "+
                                     secuenciaBuscada.toString() + 
-                                    secuenciaBuscada.imprimirLugarExacto());
+                                    secuenciaLeida.imprimirLugarExacto());
                         }
                     }
                     break;
