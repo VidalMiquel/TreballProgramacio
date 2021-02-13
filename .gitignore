@@ -1,0 +1,19 @@
+/.sts4-cache/*
+######################
+# Intellij
+######################
+.idea/
+*.iml
+*.iws
+*.ipr
+*.ids
+*.orig
+classes/
+out/
+
+######################
+# Net Beans
+######################
+build/
+nbproject
+/dist/

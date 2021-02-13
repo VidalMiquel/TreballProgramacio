@@ -1,5 +1,7 @@
 package projecteprogramacio;
 
+import java.io.FileNotFoundException;
+
 public class PalabraServicio {
 
     //Declaracions dels atributs
@@ -30,7 +32,7 @@ public class PalabraServicio {
     }
 
     //Incrementar l'array contadorCaracteres per saber quin es el més repetit.
-    public void incrementarContadorCaracteres(char caracter) {
+    private void incrementarContadorCaracteres(char caracter) {
         for (int i = 0; i < alfabeto.length; i++) {
             if (alfabeto[i] == caracter) {
                 contadorCaracteres[i]++;
@@ -39,7 +41,7 @@ public class PalabraServicio {
     }
 
     //Mètode que retorna el caràcter mès repetit dins un String.
-    public String caracterMasRepetidotoString() {
+    private String caracterMasRepetidotoString() {
 
         String salida = "";
         int caracterMasRepetido = 0;
@@ -61,7 +63,7 @@ public class PalabraServicio {
 
     //Mètode que retorna dins un string la freqüència d'aparició de cada caràcter
     //alfàbetic.
-    public String numeroAparcicionesCaractertoString() {
+    private String numeroAparcicionesCaractertoString() {
 
         String salida = "\n";
         for (int i = 0; i < alfabeto.length; i++) {
@@ -99,7 +101,7 @@ public class PalabraServicio {
     }
 
     //Mètode que retorna un String amb la paraula més repetida.
-    public String palabraMasRepetidatoString() {
+    private String palabraMasRepetidatoString() {
 
         String salida = "";
         int palabraMasRepetida = 0;
@@ -122,7 +124,7 @@ public class PalabraServicio {
     }
 
     //Incrementar l'array Palabas i l'atribut contadorPalabras.
-    public void incrementarContadorPalabras(Palabra palabra) {
+    private void incrementarContadorPalabras(Palabra palabra) {
 
         boolean acabat = false;
         for (int i = 0; i < Palabras.length && !acabat; i++) {
@@ -146,7 +148,7 @@ public class PalabraServicio {
     }
 
     //Mètode que comprova si dues paraules son iguals.
-    public boolean sonPalabrasIguales(Palabra palabra, Palabra auxiliar) {
+    private boolean sonPalabrasIguales(Palabra palabra, Palabra auxiliar) {
 
         if (palabra.getNumeroCaracteres() == auxiliar.getNumeroCaracteres()) {
             for (int j = 0; j < palabra.getNumeroCaracteres(); j++) {
@@ -161,13 +163,92 @@ public class PalabraServicio {
 
     }
     //Metode que retorna un String amb la localitzacio d'una paraula dins el fitxer
-    public String imprimirLugarExacto(Palabra palabra) {
+    private String imprimirLugarExacto(Palabra palabra) {
 
         String salida = "";
-        salida = salida + "LA PALABRA " + palabra.toString() + " APARECE EN LA LINIA "
-                + (palabra.getLinea()+1) + " Y LA COLUMNA " + palabra.getColumna();
+        salida = salida + "La palabra " + palabra.toString() + " aparece en la "
+                + "linia " + (palabra.getLinea()+1) + " y la columna " 
+                + palabra.getColumna();
 
         return salida;
     }
+    
+    
+    public void letraMasRepetida(String fichero) throws Exception{
+        PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
+        Palabra pal;
+        char caracter;
+                    while (fich.hayPalabras()) {
+                        pal = fich.lectura();
+                        for (int i = 0; i < pal.getNumeroCaracteres(); i++) {
+                            caracter = pal.obtenerCaracter(i);
+                            incrementarContadorCaracteres(caracter);
+                        }
+                        
+                    }
+                    fich.cerrarFichero();
+                    System.out.println(caracterMasRepetidotoString());
+    }
+    
+    
+    public void frecuenciaCaracteres(String fichero) throws Exception{
+        PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
+        Palabra pal;
+        char caracter;
+       
+                    while (fich.hayPalabras()) {
+                        pal = fich.lectura();
+                        for (int i = 0; i < pal.getNumeroCaracteres(); i++) {
+                          caracter = pal.obtenerCaracter(i);
+                          incrementarContadorCaracteres(caracter);
+                        }
+                    }
+                    fich.cerrarFichero();
+                    System.out.println(numeroAparcicionesCaractertoString());
+    }
+    
+    public void palabraMasFrecuente(String fichero) throws Exception{
+        PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
+        Palabra pal;
+                    while (fich.hayPalabras()) {
+                        pal = fich.lectura();
+                        incrementarContadorPalabras(pal);
+                    }
+                    fich.cerrarFichero();
+                  System.out.println(palabraMasRepetidatoString());
+    }
+    
+    public void localizarPalabra(String fichero) throws Exception{
+        PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
+        Palabra aux;
+        Palabra pal;
+                    System.out.println("Opción buscar una palabra en el fichero");
+                    System.out.print("Palabra a buscar (Máximo 20 caracteres): ");
+                    String palabra = LT.readLine();
+                    aux = new Palabra(palabra);
+                    System.out.println("La palabra buscada es: " + aux);
+                    while (fich.hayPalabras()) {
+                        pal = fich.lectura();
+                        if (sonPalabrasIguales(pal, aux)) {
+                            System.out.println(imprimirLugarExacto(pal));
+                        }
+                    }
+                    fich.cerrarFichero();
+    }
+    
+    
+    public void palabraSeguidas(String fichero)throws Exception{
+     PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
+     Palabra pal;
+     Palabra aux;
+                    pal = fich.lectura();
+                    while (fich.hayPalabras()) {
+                        aux = pal;
+                        pal = fich.lectura();
+                        if (sonPalabrasIguales(pal, aux)) {
+                        System.out.println(imprimirLugarExacto(aux));
+                        }
+    }
 
+}
 }
