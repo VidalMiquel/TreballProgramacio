@@ -30,7 +30,7 @@ public class ProjecteProgramacio {
             anal = new PalabraServicio();
             while (palFicheroIn.hayPalabras()) {
                 pal = palFicheroIn.lectura();
-                anal.incrementarContadorPalabras(pal);
+                //incrementarContadorPalabras(pal);
             }
             if (!(anal.getNumeroPalabras() < PalabraServicio.getNUMERO_MAXIMO_PALABRAS())) {
                 System.out.println("El fichero contiene demasiadas palabras diferentes. Limite: " + PalabraServicio.getNUMERO_MAXIMO_PALABRAS());
@@ -59,80 +59,28 @@ public class ProjecteProgramacio {
                     break;
                 
                 case 1:
-                    //Llegim una paraula del fitxer corresponent, la recorrem
-                    //caràcter a caràcter i incrementam contadorCaracteres 
-                    //segons el caràcter alfabètic llegit.
-                    //Imprimim per pantalla la lletra més repetida i el seu nombre
-                    //d'aparicions.
+
                     anal = new PalabraServicio();
-                    palFicheroIn = new PalabraFicheroIn(nombreFichero);
-                    while (palFicheroIn.hayPalabras()) {
-                        pal = palFicheroIn.lectura();
-                        for (int i = 0; i < pal.getNumeroCaracteres(); i++) {
-                            caracter = pal.obtenerCaracter(i);
-                            anal.incrementarContadorCaracteres(caracter);
-                        }
-                        
-                    }
-                    palFicheroIn.cerrarFichero();
-                    System.out.println(anal.caracterMasRepetidotoString());
+                    anal.letraMasRepetida(nombreFichero);
                     break;
                 
                 case 2:
-                    //Llegim una paraula del fitxer corresponent, la recorrem
-                    //caràcter a caràcter i incrementam contadorCaracteres 
-                    //segons el caràcter alfabètic llegit.
-                    //Imprimim per pantalla a freqüència d'aparició de cada
-                    //caràcter alfabètica.
+
                     anal = new PalabraServicio();
-                    palFicheroIn = new PalabraFicheroIn(nombreFichero);
-                    while (palFicheroIn.hayPalabras()) {
-                        pal = palFicheroIn.lectura();
-                        for (int i = 0; i < pal.getNumeroCaracteres(); i++) {
-                            caracter = pal.obtenerCaracter(i);
-                            anal.incrementarContadorCaracteres(caracter);
-                        }
-                    }
-                    palFicheroIn.cerrarFichero();
-                    System.out.println(anal.numeroAparcicionesCaractertoString());
+                    anal.frecuenciaCaracteres(nombreFichero);
                     break;
                 
                 case 3:
-                    //Llegim una paraula del fixter corresponent, comprovam si
-                    //ha estat llegida anteriorment, i incrementam contadorpalabras
-                    //segons la condicional explicada. 
-                    //Imprimim per pantalla la paraula més repetida dins el fitxer.
+
                     anal = new PalabraServicio();
-                    palFicheroIn = new PalabraFicheroIn(nombreFichero);
-                    while (palFicheroIn.hayPalabras()) {
-                        pal = palFicheroIn.lectura();
-                        anal.incrementarContadorPalabras(pal);
-                    }
-                    palFicheroIn.cerrarFichero();
-                    System.out.println(anal.palabraMasRepetidatoString());
+                    anal.palabraMasFrecuente(nombreFichero);
                     break;
                 
                 case 4:
-                    //Llegim una paraula des de teclat, i comprovam mitjançant 
-                    //la lectura d'una altra paraula des del fitxer si la
-                    //llegida des del teclat també és troba al fitxer.
-                    //Imprimim per pantalla, el lloc exacte on és troba la 
-                    //paraula cercada.
+
                     Palabra aux;
                     anal = new PalabraServicio();
-                    palFicheroIn = new PalabraFicheroIn(nombreFichero);
-                    System.out.println("OPCION BUSCAR UNA PALABRA EN EL FICHERO:");
-                    System.out.println("PALABRA A BUSCAR: MÁXIMO 20 CARACTERES");
-                    String palabra = LT.readLine();
-                    aux = new Palabra(palabra);
-                    System.out.println("LA PALABRA BUSCADA ES: " + aux);
-                    while (palFicheroIn.hayPalabras()) {
-                        pal = palFicheroIn.lectura();
-                        if (anal.sonPalabrasIguales(pal, aux)) {
-                            System.out.println(anal.imprimirLugarExacto(pal));
-                        }
-                    }
-                    palFicheroIn.cerrarFichero();
+                    anal.localizarPalabra(nombreFichero);
                     break;
                 
                 case 5:
@@ -141,7 +89,7 @@ public class ProjecteProgramacio {
                     //llegida des del teclat també és troba al fitxer.
                     //Imprimim per pantalla, el lloc exacte on és troba la 
                     //linia cercada.
-                    System.out.println("TEXTO A BUSCAR: MÁXIMO 250 CARACTERES");
+                    System.out.print("TEXTO A BUSCAR (MÁXIMO 250 CARACTERES): ");
                     String texto = LT.readLine();
                     Linia secuenciaBuscada = new Linia(texto);
                     Linia secuenciaLeida;
@@ -158,76 +106,22 @@ public class ProjecteProgramacio {
                     break;
                 
                 case 6:
-                    //Llegim dues paraules des del fitxer, en cerca de si n'hi ha
-                    //de repetides.
-                    //Imprimim per pantalla el lloc exacte on es torba la paraula 
-                    //repetida.
                     anal = new PalabraServicio();
-                    palFicheroIn = new PalabraFicheroIn(nombreFichero);
-                    pal = palFicheroIn.lectura();
-                    while (palFicheroIn.hayPalabras()) {
-                        aux = pal;
-                        pal = palFicheroIn.lectura();
-                        if (anal.sonPalabrasIguales(pal, aux)) {
-                            System.out.println(anal.imprimirLugarExacto(aux));
-                        }
-                    }
+                    anal.palabraSeguidas(nombreFichero);
                     break;
                 
                 case 7:
-                    //Lectura d'una paraula des de fitxer, codificant-la 
-                    //caràcter a caràcter, i creació d'una posterior formada
-                    //pels caràcters codificats. 
-                    //Finalment, escriptura de la paraula nova codificada al 
-                    //fitxer especificat.
-                    LiniaFicheroIn fichero = new LiniaFicheroIn(nombreFichero);
-                    LiniaFicheroOut ficheroCod = new LiniaFicheroOut(nombreFichero+".cod.txt");
-                    System.out.print("SEMILLA: ");
+                    System.out.print("Introducir semilla: ");
                     semilla = LT.readInt();
                     cod = new CodificacionAlfabetica(semilla);
-                    Linia secuencia;
-                    Linia auxiliar;
-                    int codigo;
-                    while (fichero.hayLineas()) {
-                        auxiliar = new Linia();
-                        secuencia = fichero.lectura();
-                        for (int i = 0; i < secuencia.getNumeroCaracteres(); i++) {
-                            codigo = (char) cod.codificar(secuencia.obtenerCaracter(i));
-                            auxiliar.añadirCaracter(codigo);
-                        }
-                        ficheroCod.escrituraLinia(auxiliar);
-                        ficheroCod.nuevaLinea();
-                    }
-                    fichero.cerrarFichero();
-                    ficheroCod.cerrarFichero();
+                    cod.codificarTexto(nombreFichero);
                     break;
                 
                 case 8:
-                    //Lectura d'una paraula des de fitxer, descodificant-la
-                    //caràcter a caràcter, i creació d'una posterior formada
-                    //pels caràcters descodificats.
-                    //Finalment, escriptura de la paraula nova descodificada al 
-                    //fitxer especificat.
-                    LiniaFicheroIn ficheroCodi = new LiniaFicheroIn(nombreFichero+".cod.txt");
-                    LiniaFicheroOut ficheroDec = new LiniaFicheroOut(nombreFichero+".decod.txt");
-                    System.out.print("SEMILLA: ");
+                    System.out.print("Introducir semilla: ");
                     semilla = LT.readInt();
                     cod = new CodificacionAlfabetica(semilla);
-                    Linia secuenciaCod;
-                    Linia ayuda;
-                    int codi;
-                    while (ficheroCodi.hayLineas()) {
-                        ayuda = new Linia();
-                        secuenciaCod = ficheroCodi.lectura();
-                        for (int i = 0; i < secuenciaCod.getNumeroCaracteres(); i++) {
-                            codi = (char) cod.deCodificar(secuenciaCod.obtenerCaracter(i));
-                            ayuda.añadirCaracter(codi);
-                        }
-                        ficheroDec.escrituraLinia(ayuda);
-                        
-                    }
-                    ficheroCodi.cerrarFichero();
-                    ficheroDec.cerrarFichero();
+                    cod.deCodificarTexto(nombreFichero);
             }
             
         }
