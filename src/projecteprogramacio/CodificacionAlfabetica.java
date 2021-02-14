@@ -83,29 +83,28 @@ public class CodificacionAlfabetica {
         }
         fich.cerrarFichero();
         fichCod.cerrarFichero();
-        System.out.println("Fichero codificado correctamente.");
+        System.out.println("Fichero codificado correctamente. (" + fichero + ".cod.txt)");
     }
-    
-    
-    public void deCodificarTexto(String fichero)throws Exception{
 
-                    LiniaFicheroIn fichCod = new LiniaFicheroIn(fichero+".cod.txt");
-                    LiniaFicheroOut fichDec = new LiniaFicheroOut(fichero+".decod.txt");
-                    Linia secuenciaCod;
-                    Linia ayuda;
-                    int codi;
-                    while (fichCod.hayLineas()) {
-                        ayuda = new Linia();
-                        secuenciaCod = fichCod.lectura();
-                        for (int i = 0; i < secuenciaCod.getNumeroCaracteres(); i++) {
-                            codi = (char) deCodificar(secuenciaCod.obtenerCaracter(i));
-                            ayuda.añadirCaracter(codi);
-                        }
-                        fichDec.escrituraLinia(ayuda);
-                        
-                    }
-                    fichCod.cerrarFichero();
-                    fichDec.cerrarFichero();
-                    System.out.println("Fichero decodificado correctamente.");
+    public void deCodificarTexto(String fichero) throws Exception {
+
+        LiniaFicheroIn fichCod = new LiniaFicheroIn(fichero);
+        LiniaFicheroOut fichDec = new LiniaFicheroOut(fichero + ".decod.txt");
+        Linia secuenciaCod;
+        Linia ayuda;
+        int codi;
+        while (fichCod.hayLineas()) {
+            ayuda = new Linia();
+            secuenciaCod = fichCod.lectura();
+            for (int i = 0; i < secuenciaCod.getNumeroCaracteres(); i++) {
+                codi = (char) deCodificar(secuenciaCod.obtenerCaracter(i));
+                ayuda.añadirCaracter(codi);
+            }
+            fichDec.escrituraLinia(ayuda);
+
+        }
+        fichCod.cerrarFichero();
+        fichDec.cerrarFichero();
+        System.out.println("Fichero decodificado correctamente. (" + fichero + ".decod.txt)");
     }
 }
