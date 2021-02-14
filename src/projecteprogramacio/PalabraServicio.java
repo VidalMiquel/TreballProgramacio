@@ -1,12 +1,14 @@
 package projecteprogramacio;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class PalabraServicio {
 
     //Declaracions dels atributs
     private static final int NUMERO_MAXIMO_PALABRAS = 500;
-    private static final char[] alfabeto = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+    private static final char[] alfabeto = "abcdefghijklmnopqrstuvwxyz.,:@?!\"()<> ".toCharArray();
     Palabra[] Palabras;
     private int[] contadorCaracteres;
     private int[] contadorPalabras;
@@ -47,7 +49,7 @@ public class PalabraServicio {
         String salida = "";
         int caracterMasRepetido = 0;
         char letra = ' ';
-        for (int i = 0; i < alfabeto.length; i++) {
+        for (int i = 0; i < 26; i++) {  //Limitam a 26 perque nomes es tenguin en compte els caracters alfabetics, es a dir, les lletres
 
             if (caracterMasRepetido < contadorCaracteres[i]) {
                 caracterMasRepetido = contadorCaracteres[i];
@@ -55,8 +57,8 @@ public class PalabraServicio {
             }
         }
 
-        salida = salida + "CARACTER MÁS REPETIDO ES: "
-                + letra + " CON "
+        salida = salida + "CARACTER MÁS REPETIDO ES '"
+                + letra + "' CON "
                 + caracterMasRepetido + " APARICIONES";
 
         return salida;
@@ -68,8 +70,8 @@ public class PalabraServicio {
 
         String salida = "\n";
         for (int i = 0; i < alfabeto.length; i++) {
-            salida = salida + "EL NUMERO DE APARICIONES DEL CARACTER : "
-                    + alfabeto[i] + " ES " + contadorCaracteres[i] + ".\n";
+            salida = salida + "EL NUMERO DE APARICIONES DEL CARACTER '"
+                    + alfabeto[i] + "' ES DE " + contadorCaracteres[i] + ".\n";
         }
         return salida;
     }
@@ -135,7 +137,7 @@ public class PalabraServicio {
                 numeroPalabras++;
                 primeraColocada = true;
                 acabat = true;
-            } else if (!(numeroPalabras<NUMERO_MAXIMO_PALABRAS)) {
+            } else if (!(numeroPalabras < NUMERO_MAXIMO_PALABRAS)) {
                 break;
             } else if (sonIguales(palabra, i)) {
                 contadorPalabras[i]++;
@@ -177,34 +179,12 @@ public class PalabraServicio {
     }
 
     public void letraMasRepetida(String fichero) throws Exception {
-        PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
-        Palabra pal;
-        char caracter;
-        while (fich.hayPalabras()) {
-            pal = fich.lectura();
-            for (int i = 0; i < pal.getNumeroCaracteres(); i++) {
-                caracter = pal.obtenerCaracter(i);
-                incrementarContadorCaracteres(caracter);
-            }
-
-        }
-        fich.cerrarFichero();
+        lecturaCaracters(fichero);
         System.out.println(caracterMasRepetidotoString());
     }
 
     public void frecuenciaCaracteres(String fichero) throws Exception {
-        PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
-        Palabra pal;
-        char caracter;
-
-        while (fich.hayPalabras()) {
-            pal = fich.lectura();
-            for (int i = 0; i < pal.getNumeroCaracteres(); i++) {
-                caracter = pal.obtenerCaracter(i);
-                incrementarContadorCaracteres(caracter);
-            }
-        }
-        fich.cerrarFichero();
+        lecturaCaracters(fichero);
         System.out.println(numeroAparcicionesCaractertoString());
     }
 
@@ -267,6 +247,23 @@ public class PalabraServicio {
         } else {
             return false;
         }
+    }
+
+    private void lecturaCaracters(String fichero) throws IOException {
+        FileReader input;
+
+        input = new FileReader(fichero);
+        BufferedReader bufIn = new BufferedReader(input);
+
+        int lectura = bufIn.read();
+        while (lectura != -1) {
+            if (lectura >= ' ') { //Evitam contar els salts de linies com caracters
+                incrementarContadorCaracteres((char) lectura);
+            }
+            lectura = bufIn.read();
+        }
+        bufIn.close();
+        input.close();
     }
 
 }
