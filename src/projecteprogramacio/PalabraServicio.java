@@ -1,22 +1,24 @@
 package projecteprogramacio;
 
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class PalabraServicio {
 
     //Declaracions dels atributs
     private static final int NUMERO_MAXIMO_PALABRAS = 500;
-    private static final char[] alfabeto = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+    private static final char[] alfabeto = "abcdefghijklmnopqrstuvwxyz.,:@?!\"()<> ".toCharArray();
     Palabra[] Palabras;
     private int[] contadorCaracteres;
     private int[] contadorPalabras;
     private int numeroPalabras;
     private int numeroCaracteres;
     private boolean primeraColocada = false;
-    
+
     //Constructor
     public PalabraServicio() throws Exception {
-        Palabras = new Palabra[500];
+        Palabras = new Palabra[NUMERO_MAXIMO_PALABRAS];
         inicilaitzarArrayPalabras();
         contadorCaracteres = new int[alfabeto.length];
         contadorPalabras = new int[NUMERO_MAXIMO_PALABRAS];
@@ -24,6 +26,7 @@ public class PalabraServicio {
         numeroCaracteres = 0;
 
     }
+
     //Mètode que inicializta l'array de paraules
     private void inicilaitzarArrayPalabras() {
         for (int i = 0; i < Palabras.length; i++) {
@@ -46,7 +49,7 @@ public class PalabraServicio {
         String salida = "";
         int caracterMasRepetido = 0;
         char letra = ' ';
-        for (int i = 0; i < alfabeto.length; i++) {
+        for (int i = 0; i < 26; i++) {  //Limitam a 26 perque nomes es tenguin en compte els caracters alfabetics, es a dir, les lletres
 
             if (caracterMasRepetido < contadorCaracteres[i]) {
                 caracterMasRepetido = contadorCaracteres[i];
@@ -54,8 +57,8 @@ public class PalabraServicio {
             }
         }
 
-        salida = salida + "CARACTER MÁS REPETIDO ES: "
-                + letra + " CON "
+        salida = salida + "CARACTER MÁS REPETIDO ES '"
+                + letra + "' CON "
                 + caracterMasRepetido + " APARICIONES";
 
         return salida;
@@ -67,18 +70,17 @@ public class PalabraServicio {
 
         String salida = "\n";
         for (int i = 0; i < alfabeto.length; i++) {
-            salida = salida + "EL NUMERO DE APARICIONES DEL CARACTER : "
-                    + alfabeto[i] + " ES " + contadorCaracteres[i] + ".\n";
+            salida = salida + "EL NUMERO DE APARICIONES DEL CARACTER '"
+                    + alfabeto[i] + "' ES DE " + contadorCaracteres[i] + ".\n";
         }
         return salida;
     }
-    
+
     //Getter de l'atribut numeroPalabras.
     public int getNumeroPalabras() {
         return numeroPalabras;
     }
 
-    
     //Getter de l'atribut constant NUMERO_MAXIMO_PALABRAS.
     public static int getNUMERO_MAXIMO_PALABRAS() {
         return NUMERO_MAXIMO_PALABRAS;
@@ -135,6 +137,8 @@ public class PalabraServicio {
                 numeroPalabras++;
                 primeraColocada = true;
                 acabat = true;
+            } else if (!(numeroPalabras < NUMERO_MAXIMO_PALABRAS)) {
+                break;
             } else if (sonIguales(palabra, i)) {
                 contadorPalabras[i]++;
                 acabat = true;
@@ -162,93 +166,104 @@ public class PalabraServicio {
         }
 
     }
+
     //Metode que retorna un String amb la localitzacio d'una paraula dins el fitxer
     private String imprimirLugarExacto(Palabra palabra) {
 
         String salida = "";
         salida = salida + "La palabra " + palabra.toString() + " aparece en la "
-                + "linia " + (palabra.getLinea()+1) + " y la columna " 
+                + "linia " + (palabra.getLinea() + 1) + " y la columna "
                 + palabra.getColumna();
 
         return salida;
     }
-    
-    
-    public void letraMasRepetida(String fichero) throws Exception{
+
+    public void letraMasRepetida(String fichero) throws Exception {
+        lecturaCaracters(fichero);
+        System.out.println(caracterMasRepetidotoString());
+    }
+
+    public void frecuenciaCaracteres(String fichero) throws Exception {
+        lecturaCaracters(fichero);
+        System.out.println(numeroAparcicionesCaractertoString());
+    }
+
+    public void palabraMasFrecuente(String fichero) throws Exception {
         PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
         Palabra pal;
-        char caracter;
-                    while (fich.hayPalabras()) {
-                        pal = fich.lectura();
-                        for (int i = 0; i < pal.getNumeroCaracteres(); i++) {
-                            caracter = pal.obtenerCaracter(i);
-                            incrementarContadorCaracteres(caracter);
-                        }
-                        
-                    }
-                    fich.cerrarFichero();
-                    System.out.println(caracterMasRepetidotoString());
+        while (fich.hayPalabras()) {
+            pal = fich.lectura();
+            incrementarContadorPalabras(pal);
+        }
+        fich.cerrarFichero();
+        System.out.println(palabraMasRepetidatoString());
     }
-    
-    
-    public void frecuenciaCaracteres(String fichero) throws Exception{
-        PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
-        Palabra pal;
-        char caracter;
-       
-                    while (fich.hayPalabras()) {
-                        pal = fich.lectura();
-                        for (int i = 0; i < pal.getNumeroCaracteres(); i++) {
-                          caracter = pal.obtenerCaracter(i);
-                          incrementarContadorCaracteres(caracter);
-                        }
-                    }
-                    fich.cerrarFichero();
-                    System.out.println(numeroAparcicionesCaractertoString());
-    }
-    
-    public void palabraMasFrecuente(String fichero) throws Exception{
-        PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
-        Palabra pal;
-                    while (fich.hayPalabras()) {
-                        pal = fich.lectura();
-                        incrementarContadorPalabras(pal);
-                    }
-                    fich.cerrarFichero();
-                  System.out.println(palabraMasRepetidatoString());
-    }
-    
-    public void localizarPalabra(String fichero) throws Exception{
+
+    public void localizarPalabra(String fichero) throws Exception {
         PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
         Palabra aux;
         Palabra pal;
-                    System.out.println("Opción buscar una palabra en el fichero");
-                    System.out.print("Palabra a buscar (Máximo 20 caracteres): ");
-                    String palabra = LT.readLine();
-                    aux = new Palabra(palabra);
-                    System.out.println("La palabra buscada es: " + aux);
-                    while (fich.hayPalabras()) {
-                        pal = fich.lectura();
-                        if (sonPalabrasIguales(pal, aux)) {
-                            System.out.println(imprimirLugarExacto(pal));
-                        }
-                    }
-                    fich.cerrarFichero();
-    }
-    
-    
-    public void palabraSeguidas(String fichero)throws Exception{
-     PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
-     Palabra pal;
-     Palabra aux;
-                    pal = fich.lectura();
-                    while (fich.hayPalabras()) {
-                        aux = pal;
-                        pal = fich.lectura();
-                        if (sonPalabrasIguales(pal, aux)) {
-                        System.out.println(imprimirLugarExacto(aux));
-                        }
+        System.out.println("Opción buscar una palabra en el fichero");
+        System.out.print("Palabra a buscar (Máximo 20 caracteres): ");
+        String palabra = LT.readLine();
+        aux = new Palabra(palabra);
+        System.out.println("La palabra buscada es: " + aux);
+        while (fich.hayPalabras()) {
+            pal = fich.lectura();
+            if (sonPalabrasIguales(pal, aux)) {
+                System.out.println(imprimirLugarExacto(pal));
+            }
+        }
+        fich.cerrarFichero();
     }
 
-}
+    public void palabraSeguidas(String fichero) throws Exception {
+        PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
+        Palabra pal;
+        Palabra aux;
+        pal = fich.lectura();
+        while (fich.hayPalabras()) {
+            aux = pal;
+            pal = fich.lectura();
+            if (sonPalabrasIguales(pal, aux)) {
+                System.out.println(imprimirLugarExacto(aux));
+            }
+        }
+
+    }
+
+    public boolean comprovarParaulesDiferents(String fichero) throws IOException {
+        PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
+        Palabra pal;
+
+        while (fich.hayPalabras()) {
+            pal = fich.lectura();
+            incrementarContadorPalabras(pal);
+        }
+        fich.cerrarFichero();
+        if (!(numeroPalabras < NUMERO_MAXIMO_PALABRAS)) {
+            System.out.println("El fichero contiene demasiadas palabras diferentes. Limite: " + NUMERO_MAXIMO_PALABRAS);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void lecturaCaracters(String fichero) throws IOException {
+        FileReader input;
+
+        input = new FileReader(fichero);
+        BufferedReader bufIn = new BufferedReader(input);
+
+        int lectura = bufIn.read();
+        while (lectura != -1) {
+            if (lectura >= ' ') { //Evitam contar els salts de linies com caracters
+                incrementarContadorCaracteres((char) lectura);
+            }
+            lectura = bufIn.read();
+        }
+        bufIn.close();
+        input.close();
+    }
+
 }

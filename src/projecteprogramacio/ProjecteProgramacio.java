@@ -1,52 +1,21 @@
 package projecteprogramacio;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class ProjecteProgramacio {
-    
-    public static void main(String[] args) throws Exception {
-        new ProjecteProgramacio().ProgramaPrincipal();
-        
-    }
-    
+
+    private String nombreFichero;
+    private boolean sortir = false;
+
     public void ProgramaPrincipal() throws Exception {
-        boolean sortir = false;
-        int semilla;
-        char caracter;
-        
-        Palabra pal;
-        System.out.println("NOMBRE DEL FICHERO A ANALIZAR: ");
-        String nombreFichero = LT.readLine();
-        PalabraFicheroIn palFicheroIn;
-        PalabraServicio anal;
-        Analisis analisis = new Analisis();
-        
-        try {
-            //Cmprovacions inicials del programa.
-            //Miram que el fitxer tengui menys de 500 paraules repetides.
-            //Recompte del numero de caràcters, paraules i lines.
-            //Imprimim per pantalla el resultats.
-            palFicheroIn = new PalabraFicheroIn(nombreFichero);
-            anal = new PalabraServicio();
-            while (palFicheroIn.hayPalabras()) {
-                pal = palFicheroIn.lectura();
-                //incrementarContadorPalabras(pal);
-            }
-            if (!(anal.getNumeroPalabras() < PalabraServicio.getNUMERO_MAXIMO_PALABRAS())) {
-                System.out.println("El fichero contiene demasiadas palabras diferentes. Limite: " + PalabraServicio.getNUMERO_MAXIMO_PALABRAS());
-                sortir = true;
-            }
-            analisis.analisis(nombreFichero);
-            if (analisis.getCaracteres()==0){
-                sortir = true;
-                System.out.println("El fichero deseado esta vacio. Ninguna opción del menu es aplicable");
-            }
-            palFicheroIn.cerrarFichero();
-        } catch (FileNotFoundException ex) {
-            System.out.println("El fichero deseado no existe. Ninguna opción del menu es aplicable");
-            sortir = true;
-        }
         CodificacionAlfabetica cod;
+        int semilla;
+        PalabraServicio anal = new PalabraServicio();
+
+        abrirArchivo();
+        comprovarCodificacio();
+        Analisis.analisis(nombreFichero);
+
         while (!sortir) {
             borrarPantalla();
             menu();
@@ -57,32 +26,31 @@ public class ProjecteProgramacio {
                     //Sortir del while, fi del programa
                     sortir = true;
                     break;
-                
+
                 case 1:
 
                     anal = new PalabraServicio();
                     anal.letraMasRepetida(nombreFichero);
                     break;
-                
+
                 case 2:
 
                     anal = new PalabraServicio();
                     anal.frecuenciaCaracteres(nombreFichero);
                     break;
-                
+
                 case 3:
 
                     anal = new PalabraServicio();
                     anal.palabraMasFrecuente(nombreFichero);
                     break;
-                
+
                 case 4:
 
-                    Palabra aux;
                     anal = new PalabraServicio();
                     anal.localizarPalabra(nombreFichero);
                     break;
-                
+
                 case 5:
                     //Llegim una linia des de teclat, i comprovam mitjançant 
                     //la lectura d'una altra linia des del fitxer si la
@@ -94,39 +62,34 @@ public class ProjecteProgramacio {
                     Linia secuenciaBuscada = new Linia(texto);
                     Linia secuenciaLeida;
                     LiniaFicheroIn fich = new LiniaFicheroIn(nombreFichero);
-                    
+
                     while (fich.hayLineas()) {
                         secuenciaLeida = fich.lectura();
                         if (secuenciaLeida.contienePalabra(secuenciaBuscada)) {
-                            System.out.println("LA LINIA: "+
-                                    secuenciaBuscada.toString() + 
-                                    secuenciaLeida.imprimirLugarExacto());
+                            System.out.println("LA LINIA: "
+                                    + secuenciaBuscada.toString()
+                                    + secuenciaLeida.imprimirLugarExacto());
                         }
                     }
                     break;
-                
+
                 case 6:
                     anal = new PalabraServicio();
                     anal.palabraSeguidas(nombreFichero);
                     break;
-                
+
                 case 7:
                     System.out.print("Introducir semilla: ");
                     semilla = LT.readInt();
                     cod = new CodificacionAlfabetica(semilla);
                     cod.codificarTexto(nombreFichero);
                     break;
-                
-                case 8:
-                    System.out.print("Introducir semilla: ");
-                    semilla = LT.readInt();
-                    cod = new CodificacionAlfabetica(semilla);
-                    cod.deCodificarTexto(nombreFichero);
+
             }
-            
+
         }
     }
-    
+
     //Mètode per imprimir per pantalla el menu.
     public void menu() {
         System.out.println("-------------------------------------------------");
@@ -138,16 +101,69 @@ public class ProjecteProgramacio {
         System.out.println("5.BUSCAR UN TEXTO");
         System.out.println("6.BUSCAR PALABRAS REPETIDAS");
         System.out.println("7.CODIFICAR UN FICHERO");
-        System.out.println("8.DECODIFICAR UN FICHERO");
         System.out.println("0.SALIR DEL PROGRAMA");
         System.out.println("-------------------------------------------------");
-        
+
     }
-    
+
     //Mètode duu a terme el borrat de la pantalla per clarificar el resultat
     //obtingut.
     public static void borrarPantalla() {
         System.out.print("\n\n\n\n\n\n\n\n\n");
     }
-    
+
+    private void abrirArchivo() throws Exception {
+        PalabraServicio anal = new PalabraServicio();
+        System.out.println("NOMBRE DEL FICHERO A ANALIZAR: ");
+        nombreFichero = LT.readLine();
+
+        try {
+            PalabraFicheroIn palFicheroIn = new PalabraFicheroIn(nombreFichero);
+            this.sortir = anal.comprovarParaulesDiferents(nombreFichero);
+            palFicheroIn.cerrarFichero();
+        } catch (IOException ex) {
+            System.out.println("El fichero deseado no existe. Ninguna opción del menu es aplicable");
+            sortir = true;
+        }
+    }
+
+    private void comprovarCodificacio() throws Exception {
+        if (comprovarTerminacion()) {
+            System.out.println("ATENCIÓN: El fichero introducido esta codificado.\n"
+                    + "Quieres decodificarlo antes de entrar al menu?(s/n)");
+            if ('s' == LT.readChar()) {
+                System.out.println("Introduce la semilla: ");
+                CodificacionAlfabetica cod = new CodificacionAlfabetica(LT.readInt());
+                cod.deCodificarTexto(nombreFichero);
+                nombreFichero += ".decod.txt";
+            } else {
+                System.out.println("Continuando con el archivo codificado...");
+            }
+        }
+    }
+
+    //Metode que comprova si el nom del fitxer ens diu que esta codificat
+    private boolean comprovarTerminacion() {
+        char[] cod = ".cod.txt".toCharArray();
+        char[] nom = nombreFichero.toCharArray();
+
+        if (cod.length <= nom.length) {
+            int nomI = nom.length - 1;
+            int codI = cod.length - 1;
+
+            for (; (codI >= 0); codI--) {
+                if (cod[codI] != nom[nomI]) {
+                    return false;
+                }
+                nomI--;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        new ProjecteProgramacio().ProgramaPrincipal();
+    }
 }
