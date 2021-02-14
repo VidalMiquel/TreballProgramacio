@@ -13,8 +13,8 @@ public class ProjecteProgramacio {
         PalabraServicio anal = new PalabraServicio();
 
         abrirArchivo();
-        comprovarCodificacio();
-        Analisis.analisis(nombreFichero);
+        if(!sortir) comprovarCodificacio();
+        if(!sortir) Analisis.analisis(nombreFichero);
 
         while (!sortir) {
             borrarPantalla();
