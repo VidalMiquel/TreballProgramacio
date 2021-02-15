@@ -18,6 +18,11 @@ public class Analisis {
         caracteres(nomFitxer);
         palabras(nomFitxer);
         linias(nomFitxer);
+        
+        //Si l'arxiu esta buit mostram a 0 totes les variables
+        if((caracteres==0)&&(palabras==0)){
+            linias=-1;
+        }
 
         System.out.println("Hay un total de " + caracteres + " caracteres");
         System.out.println("Hay un total de " + palabras + " palabras");
