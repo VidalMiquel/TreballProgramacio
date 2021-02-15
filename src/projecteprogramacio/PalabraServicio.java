@@ -85,11 +85,6 @@ public class PalabraServicio {
         return salida;
     }
 
-    //Getter de l'atribut numeroPalabras.
-    public int getNumeroPalabras() {
-        return numeroPalabras;
-    }
-
     //Getter de l'atribut constant NUMERO_MAXIMO_PALABRAS.
     public static int getNUMERO_MAXIMO_PALABRAS() {
         return NUMERO_MAXIMO_PALABRAS;
@@ -109,7 +104,6 @@ public class PalabraServicio {
         } else {
             return false;
         }
-
     }
 
     //Mètode que retorna un String amb la paraula més repetida.
@@ -134,9 +128,7 @@ public class PalabraServicio {
                         + "\n";
             }
         }
-
         return salida;
-
     }
 
     //Incrementar l'array Palabas i l'atribut contadorPalabras.
@@ -183,7 +175,6 @@ public class PalabraServicio {
         } else {
             return false;
         }
-
     }
 
     //Metode que retorna un String amb la localitzacio d'una paraula dins 
