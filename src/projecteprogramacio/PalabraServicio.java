@@ -9,7 +9,7 @@ public class PalabraServicio {
     //Declaracions dels atributs
     private static final int NUMERO_MAXIMO_PALABRAS = 500;
     private static final char[] alfabeto = "abcdefghijklmnopqrstuvwxyz.,:@?!\"()<> ".toCharArray();
-    Palabra[] Palabras;
+    private Palabra[] Palabras;
     private int[] contadorCaracteres;
     private int[] contadorPalabras;
     private int numeroPalabras;
@@ -57,9 +57,9 @@ public class PalabraServicio {
             }
         }
 
-        salida = salida + "CARACTER MÁS REPETIDO ES '"
-                + letra + "' CON "
-                + caracterMasRepetido + " APARICIONES";
+        salida = salida + "Caracter más repetido es '"
+                + letra + "' con "
+                + caracterMasRepetido + " apariciones.";
 
         return salida;
     }
@@ -70,8 +70,8 @@ public class PalabraServicio {
 
         String salida = "\n";
         for (int i = 0; i < alfabeto.length; i++) {
-            salida = salida + "EL NUMERO DE APARICIONES DEL CARACTER '"
-                    + alfabeto[i] + "' ES DE " + contadorCaracteres[i] + ".\n";
+            salida = salida + "El número de apariciones del caracter '"
+                    + alfabeto[i] + "' es de " + contadorCaracteres[i] + ".\n";
         }
         return salida;
     }
@@ -128,25 +128,25 @@ public class PalabraServicio {
     //Incrementar l'array Palabas i l'atribut contadorPalabras.
     private void incrementarContadorPalabras(Palabra palabra) {
 
-        boolean acabat = false;
-        for (int i = 0; i < Palabras.length && !acabat; i++) {
+        boolean acabado = false;
+        for (int i = 0; i < Palabras.length && !acabado; i++) {
 
             if (!primeraColocada) {
                 Palabras[i] = palabra;
                 contadorPalabras[i]++;
                 numeroPalabras++;
                 primeraColocada = true;
-                acabat = true;
+                acabado = true;
             } else if (!(numeroPalabras < NUMERO_MAXIMO_PALABRAS)) {
                 break;
             } else if (sonIguales(palabra, i)) {
                 contadorPalabras[i]++;
-                acabat = true;
+                acabado = true;
             } else if (Palabras[i].vacia()) {
                 Palabras[i] = palabra;
                 contadorPalabras[i]++;
                 numeroPalabras++;
-                acabat = true;
+                acabado = true;
             }
         }
     }
@@ -206,6 +206,7 @@ public class PalabraServicio {
         boolean trobada = false;
         System.out.print("Palabra a buscar (Máximo 20 caracteres): ");
         String palabra = LT.readLine();
+        System.out.println("");
         aux = new Palabra(palabra);
         while (fich.hayPalabras()) {
             pal = fich.lectura();
@@ -225,13 +226,18 @@ public class PalabraServicio {
         PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
         Palabra pal;
         Palabra aux;
+        boolean encontrado = false;
         pal = fich.lectura();
         while (fich.hayPalabras()) {
             aux = pal;
             pal = fich.lectura();
             if (sonPalabrasIguales(pal, aux)) {
                 System.out.println(imprimirLugarExacto(aux));
+                encontrado = true;
             }
+        }
+        if(!encontrado){
+            System.out.println("No hay palabras iguales seguidas en el fichero.");
         }
 
     }
