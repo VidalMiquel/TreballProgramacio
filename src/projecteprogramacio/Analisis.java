@@ -34,9 +34,10 @@ public class Analisis {
     //Metode que conta el nombre de caracters del fitxer
     private static void caracteres(String nombreFichero) throws IOException {
         FileReader input;
+        BufferedReader bufIn;
 
         input = new FileReader(nombreFichero);
-        BufferedReader bufIn = new BufferedReader(input);
+        bufIn = new BufferedReader(input);
 
         int lectura = bufIn.read();
         while (lectura != -1) {
@@ -52,9 +53,10 @@ public class Analisis {
     //Metode que conta el nombre de linias del fitxer
     private static void linias(String nombreFichero) throws IOException {
         FileReader input;
-
+        BufferedReader bufIn;
+        
         input = new FileReader(nombreFichero);
-        BufferedReader bufIn = new BufferedReader(input);
+        bufIn = new BufferedReader(input);
 
         int lectura = bufIn.read();
         while (lectura != -1) {

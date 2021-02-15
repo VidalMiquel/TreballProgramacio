@@ -114,9 +114,9 @@ public class PalabraServicio {
         }
         for (int i = 0; i < alfabeto.length; i++) {
             if (palabraMasRepetida == contadorPalabras[i]) {
-                salida = salida + "PALABRA MÁS REPETIDA ES: '"
-                        + Palabras[i].toString() + "' CON "
-                        + palabraMasRepetida + " APARICIONES"
+                salida = salida + "Palabra mas repetida es: '"
+                        + Palabras[i].toString() + "' con "
+                        + palabraMasRepetida + " apariciones."
                         + "\n";
             }
         }
@@ -203,16 +203,20 @@ public class PalabraServicio {
         PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
         Palabra aux;
         Palabra pal;
-        System.out.println("Opción buscar una palabra en el fichero");
+        boolean trobada = false;
         System.out.print("Palabra a buscar (Máximo 20 caracteres): ");
         String palabra = LT.readLine();
         aux = new Palabra(palabra);
-        System.out.println("La palabra buscada es: " + aux);
         while (fich.hayPalabras()) {
             pal = fich.lectura();
             if (sonPalabrasIguales(pal, aux)) {
                 System.out.println(imprimirLugarExacto(pal));
+                trobada = true;
             }
+        }
+        if(!trobada){
+            System.out.println("La palabra buscada no se encuentra "
+                    + "en el fichero. \n");
         }
         fich.cerrarFichero();
     }
