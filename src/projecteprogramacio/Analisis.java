@@ -10,23 +10,18 @@ public class Analisis {
     private static int caracteres;
 
     //Metode principal que s'encarrega d'imprimir l'informacio basica del fitxer 
-    public static boolean analisis(String nomFitxer) throws IOException {
+    public static boolean analisis(String nomFitxer) throws Exception {
         palabras = 0;
         linias = 0;
         caracteres = 0;
 
-        caracteres(nomFitxer);
-        palabras(nomFitxer);
-        linias(nomFitxer);
+        numCaracteres(nomFitxer);
+        numPalabras(nomFitxer);
+        numLinias(nomFitxer);
         
-        //Si l'arxiu esta buit mostram a 0 totes les variables
-        if((caracteres==0)&&(palabras==0)){
-            linias=-1;
-        }
-
         System.out.println("Hay un total de " + caracteres + " caracteres");
         System.out.println("Hay un total de " + palabras + " palabras");
-        System.out.println("Hay un total de " + (linias + 1) + " linias");
+        System.out.println("Hay un total de " + linias + " linias");
 
         if (caracteres == 0) {     //Retorna true si el fitxer esta buit
             System.out.println("El fichero deseado esta vacio. Ninguna opción del menu es aplicable");
@@ -37,7 +32,7 @@ public class Analisis {
     }
 
     //Metode que conta el nombre de caracters del fitxer
-    private static void caracteres(String nombreFichero) throws IOException {
+    private static void numCaracteres(String nombreFichero) throws IOException {
         FileReader input;
         BufferedReader bufIn;
 
@@ -56,26 +51,20 @@ public class Analisis {
     }
 
     //Metode que conta el nombre de linias del fitxer
-    private static void linias(String nombreFichero) throws IOException {
-        FileReader input;
-        BufferedReader bufIn;
-        
-        input = new FileReader(nombreFichero);
-        bufIn = new BufferedReader(input);
-
-        int lectura = bufIn.read();
-        while (lectura != -1) {
-            if (lectura == 10) {//El 10 equival al salt de linia
-                linias++;
-            }
-            lectura = bufIn.read();
+    private static void numLinias(String nombreFichero) throws Exception {
+        LiniaFicheroIn li;
+        li = new LiniaFicheroIn(nombreFichero);
+        //Llegim fins quedarnos sense paraules
+        while (li.hayLineas()) {
+            li.lectura();
+            linias++;
         }
-        bufIn.close();
-        input.close();
+        //Tancam l'arxiu
+        li.cerrarFichero();
     }
 
     //Metode que conta el nombre de paraules del fitxer
-    private static void palabras(String nombreFichero) throws IOException {
+    private static void numPalabras(String nombreFichero) throws IOException {
         PalabraFicheroIn pi;
         pi = new PalabraFicheroIn(nombreFichero);
         //Llegim fins quedarnos sense paraules
