@@ -69,32 +69,18 @@ public class ProjecteProgramacio {
                     break;
 
                 case 5:
-                    //Llegim una linia des de teclat, i comprovam mitjançant 
-                    //la lectura d'una altra linia des del fitxer si la
-                    //llegida des del teclat també és troba al fitxer.
-                    //Imprimim per pantalla, el lloc exacte on és troba la 
-                    //linia cercada.
-                    System.out.print("Texto a buscar (máximo 250 caracteres): ");
-                    String texto = LT.readLine();
-                    Linia secuenciaBuscada = new Linia(texto);
-                    Linia secuenciaLeida;
-                    LiniaFicheroIn fich = new LiniaFicheroIn(nombreFichero);
-
-                    while (fich.hayLineas()) {
-                        secuenciaLeida = fich.lectura();
-                        if (secuenciaLeida.contienePalabra(secuenciaBuscada)) {
-                            System.out.println("LA LINIA: "
-                                    + secuenciaBuscada.toString()
-                                    + secuenciaLeida.imprimirLugarExacto());
-                        }
-                    }
+                    System.out.println("La opción introducida es mostrar por "
+                            + "pantalla la localización exacta del texto "
+                            + "introducido por teclado en el fichero. \n");
+                    buscarTexto();
+                    
                     break;
 
                 case 6:
                     //Sexta opció del menú.
                     System.out.println("La opción introducida es mostar por "
                             + "pantalla la localización exacte de dos palabras "
-                            + "seguidas iguales en el fichero.");
+                            + "seguidas iguales en el fichero. \n");
                     anal = new PalabraServicio();
                     anal.palabraSeguidas(nombreFichero);
                     break;
@@ -194,6 +180,32 @@ public class ProjecteProgramacio {
         } else {
             return false;
         }
+    }
+    
+    
+    private void buscarTexto()throws Exception{
+        
+        boolean encontrado = false;
+        System.out.print("Texto a buscar (máximo 250 caracteres): ");
+                    String texto = LT.readLine();
+                    System.out.println("");
+                    Linia secuenciaBuscada = new Linia(texto);
+                    Linia secuenciaLeida;
+                    LiniaFicheroIn fich = new LiniaFicheroIn(nombreFichero);
+
+                    while (fich.hayLineas()) {
+                        secuenciaLeida = fich.lectura();
+                        if (secuenciaLeida.contienePalabra(secuenciaBuscada)) {
+                            encontrado = true;
+                            System.out.println("El texto: "
+                                    + secuenciaBuscada.toString()
+                                    + secuenciaLeida.imprimirLugarExacto());
+                        }
+                    }
+                    if(!encontrado){
+                        System.out.println("El texto a buscar no aparece en el"
+                                + "fichero.");
+                    }
     }
 
     public static void main(String[] args) throws Exception {

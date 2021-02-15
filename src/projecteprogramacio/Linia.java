@@ -115,8 +115,8 @@ public class Linia {
         }
         
         String salida = "";
-        salida = salida + " APARECE EN LA LINIA " 
-                + (this.linia+1) + " Y LA COLUMNA " + columna;
+        salida = salida + "Aparece en la linia " 
+                + (this.linia+1) + " y la columna " + columna;
 
         return salida;
     }
