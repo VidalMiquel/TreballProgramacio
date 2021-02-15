@@ -13,13 +13,9 @@ public class PalabraFicheroOut {
     //Declaracions dels atributs
     private BufferedWriter BufferedFicheroOut = null;
     private FileWriter FileFicheroOut = null;
-    private static final int ESPACIO=(int) ' ';    
-    private static final int SALTO_LINEA = (int)'\n';
-    private static final int RETURN=(int) '\r';
 
     //Constructor que inicialtza el FileWriter i el BufferedWriter.
     public PalabraFicheroOut(String nombreFichero)throws Exception{
-        
         FileFicheroOut = new FileWriter(nombreFichero);
         BufferedFicheroOut = new BufferedWriter(FileFicheroOut);
         
@@ -27,7 +23,10 @@ public class PalabraFicheroOut {
      
     //Mètode que escriu una paraula dins el fitxer caràcter a caràcter.
     public void escrituraPalabra(Palabra palabra) throws IOException{
+        //Recorrem la paraula passada per paràmetre.
         for(int i = 0; i<palabra.getNumeroCaracteres(); i++){
+            //Escrivim al fitxer, caràcter a caràcter la paraula
+            //passada per paràmetre.
             BufferedFicheroOut.write(palabra.obtenerCaracter(i));
         }
     }

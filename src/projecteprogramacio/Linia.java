@@ -61,10 +61,13 @@ public class Linia {
     }
     
     //Mètode que comprova si una linia passada per paràmetre es troba dins
-    //la linia que crida el mètode.
+    //la linia que crida el mètode. //REVISAR PA
     public boolean contienePalabra(Linia a) {
       
+        //Comprovam que la linia passada per paràmetre té un nombre
+        //inferior o igual a la linia que crida al mètode.
         if (numeroCaracteres>=a.numeroCaracteres) {
+            //Recorrem la linia que crida al mètode.
             for (int indice=0;indice<numeroCaracteres;indice++) {
                 if ((numeroCaracteres-indice)>=a.numeroCaracteres) {
                     boolean contenida=true;
