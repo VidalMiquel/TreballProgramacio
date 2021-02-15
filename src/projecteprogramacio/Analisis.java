@@ -3,8 +3,13 @@ package projecteprogramacio;
 import java.io.*;
 
 public class Analisis {
+    
+    /*
+    FUNCIONALITAT: duu a terme l'anàlisi inicial, del número de caràcters,
+    paraules i línies que formen el fitxer a tractar.
+    */
 
-    //ATRIBUTS
+    //Declaracions dels atributs.
     private static int palabras;
     private static int linias;
     private static int caracteres;
@@ -15,9 +20,9 @@ public class Analisis {
         linias = 0;
         caracteres = 0;
 
-        numCaracteres(nomFitxer);
-        numPalabras(nomFitxer);
-        numLinias(nomFitxer);
+        numCaracteresTotal(nomFitxer);
+        numPalabrasTotal(nomFitxer);
+        numLiniasTotal(nomFitxer);
         
         System.out.println("Hay un total de " + caracteres + " caracteres");
         System.out.println("Hay un total de " + palabras + " palabras");
@@ -31,8 +36,8 @@ public class Analisis {
         }
     }
 
-    //Metode que conta el nombre de caracters del fitxer
-    private static void numCaracteres(String nombreFichero) throws IOException {
+    //Metode que conta el nombre de caracters del fitxer.
+    private static void numCaracteresTotal(String nombreFichero) throws IOException {
         FileReader input;
         BufferedReader bufIn;
 
@@ -41,7 +46,8 @@ public class Analisis {
 
         int lectura = bufIn.read();
         while (lectura != -1) {
-            if (lectura >= ' ') { //Evitam contar els salts de linies com caracters
+            //Evitam contar els salts de linies com caracters.
+            if (lectura >= ' ') { 
                 caracteres++;
             }
             lectura = bufIn.read();
@@ -50,29 +56,29 @@ public class Analisis {
         input.close();
     }
 
-    //Metode que conta el nombre de linias del fitxer
-    private static void numLinias(String nombreFichero) throws Exception {
+    //Mètode que conta el nombre de linias del fitxer.
+    private static void numLiniasTotal(String nombreFichero) throws Exception {
         LiniaFicheroIn li;
         li = new LiniaFicheroIn(nombreFichero);
-        //Llegim fins quedarnos sense paraules
+        //Llegim fins quedarnos sense paraules.
         while (li.hayLineas()) {
             li.lectura();
             linias++;
         }
-        //Tancam l'arxiu
+        //Tancam l'arxiu.
         li.cerrarFichero();
     }
 
-    //Metode que conta el nombre de paraules del fitxer
-    private static void numPalabras(String nombreFichero) throws IOException {
+    //Mètode que conta el nombre de paraules del fitxer.
+    private static void numPalabrasTotal(String nombreFichero) throws IOException {
         PalabraFicheroIn pi;
         pi = new PalabraFicheroIn(nombreFichero);
-        //Llegim fins quedarnos sense paraules
+        //Llegim fins quedarnos sense linies.
         while (pi.hayPalabras()) {
             pi.lectura();
             palabras++;
         }
-        //Tancam l'arxiu
+        //Tancam l'arxiu.
         pi.cerrarFichero();
     }
     
