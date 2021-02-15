@@ -7,8 +7,8 @@ import java.io.IOException;
 public class LiniaFicheroIn {
 
     //Declaracions dels atributs
-    BufferedReader BufferedFicheroIn = null;
-    FileReader FileFicheroIn = null;
+    private BufferedReader BufferedFicheroIn = null;
+    private FileReader FileFicheroIn = null;
     private static final int FINAL_FICHERO = -1;
     private static final int RETURN = (int) '\r';
     private static final int SALTO_LINEA = (int) '\n';
@@ -50,7 +50,7 @@ public class LiniaFicheroIn {
 
     //Mètode que  incrementa els atirbuts linia i columna, segons
     //on es trobi la linia lletgida dins el fitxer.
-    public void actualizacionLineaColumna() {
+    private void actualizacionLineaColumna() {
         if (codigo == SALTO_LINEA) {
             linia++;
             columna = 1;

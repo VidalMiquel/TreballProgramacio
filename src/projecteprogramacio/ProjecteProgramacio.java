@@ -4,6 +4,7 @@ import java.io.IOException;
 
 public class ProjecteProgramacio {
 
+    //Declarcions de variables globals.
     private String nombreFichero;
     private boolean sortir = false;
 
@@ -12,16 +13,22 @@ public class ProjecteProgramacio {
         int semilla;
         PalabraServicio anal;
 
+        //Realitzam les comprovacions prèvies per poder tractar un fitxer.
         abrirArchivo();
         if (!sortir) {
+            //Comprovam si el fitxer a tractar ésta codificat.
             comprovarCodificacio();
         }
         if (!sortir) {
+            //Analitzam el fitxer, imprimim per pantalla les dades demenades.
             this.sortir = Analisis.analisis(nombreFichero);
         }
 
         while (!sortir) {
+            //"Borram" la pantalla per fer còmodo la visualització dels
+            //resultats i del menú d'opcions.
             borrarPantalla();
+            //Mostram per pantalla el menú d'opcions.
             menu();
             System.out.print("Introduce la opción ha realizar: ");
             int opcioMenu = LT.readInt();
@@ -73,7 +80,7 @@ public class ProjecteProgramacio {
                             + "pantalla la localización exacta del texto "
                             + "introducido por teclado en el fichero. \n");
                     buscarTexto();
-                    
+
                     break;
 
                 case 6:
@@ -99,9 +106,10 @@ public class ProjecteProgramacio {
                     break;
 
                 default:
+                    //Codi a ejecutar en cas de que la opció introduïda no
+                    //és correcte.
                     System.out.println("Opción introducida incorrecta.");
-                    
-                    
+
             }
 
         }
@@ -131,37 +139,49 @@ public class ProjecteProgramacio {
         System.out.print("\n\n\n\n\n\n\n\n\n");
     }
 
+    //Mètode que engloba la opertura del fitxer i la comprovació de la seva
+    //existència.
     private void abrirArchivo() throws Exception {
         PalabraServicio anal = new PalabraServicio();
-        System.out.println("NOMBRE DEL FICHERO A ANALIZAR: ");
+        System.out.print("Nombre del fichero a analizar: ");
         nombreFichero = LT.readLine();
 
         try {
             PalabraFicheroIn palFicheroIn = new PalabraFicheroIn(nombreFichero);
+            //Comprovam que el fitxer no sobrapassi el límit de 
+            //paraules diferents.
             this.sortir = anal.comprovarParaulesDiferents(nombreFichero);
             palFicheroIn.cerrarFichero();
         } catch (IOException ex) {
-            System.out.println("El fichero deseado no existe. Ninguna opción del menu es aplicable");
+            //Codi a executar en el cas de la no existència del fitxer.
+            System.out.println("El fichero deseado no existe. Ninguna opción del menu es aplicable.");
             sortir = true;
         }
     }
 
+    //Mètode que comprova si el fitxer a tractar està codificat o no.
     private void comprovarCodificacio() throws Exception {
         if (comprovarTerminacion()) {
             System.out.println("ATENCIÓN: El fichero introducido esta codificado.\n"
                     + "Quieres decodificarlo antes de entrar al menu?(s/n)");
-            if ( 's' == LT.readChar()) {
+            //Codi a executar si volem decodificar el fitxer a tractar.
+            if ('s' == LT.readChar()) {
                 System.out.println("Introduce la semilla: ");
                 CodificacionAlfabetica cod = new CodificacionAlfabetica(LT.readInt());
+                //Decodificam el fitxer
                 cod.deCodificarTexto(nombreFichero);
+                //Nou nom del fitxer, actualment codificat.
                 nombreFichero += ".decod.txt";
             } else {
+                //Codi a executar si volem  NO volem decodificar 
+                //el fitxer a tractar.
                 System.out.println("Continuando con el archivo codificado...");
             }
         }
     }
 
-    //Metode que comprova si el nom del fitxer ens diu que esta codificat
+    //Mètode que comprova si el fitxer a tractar està codificat.
+    //COMENTAR JOAN PA
     private boolean comprovarTerminacion() {
         char[] cod = ".cod.txt".toCharArray();
         char[] nom = nombreFichero.toCharArray();
@@ -181,31 +201,39 @@ public class ProjecteProgramacio {
             return false;
         }
     }
-    
-    
-    private void buscarTexto()throws Exception{
-        
+
+    //Mètode que duu a terme la cerca d'un text introduït per teclat
+    //dins el fitxer que tractam.
+    private void buscarTexto() throws Exception {
+
         boolean encontrado = false;
         System.out.print("Texto a buscar (máximo 250 caracteres): ");
-                    String texto = LT.readLine();
-                    System.out.println("");
-                    Linia secuenciaBuscada = new Linia(texto);
-                    Linia secuenciaLeida;
-                    LiniaFicheroIn fich = new LiniaFicheroIn(nombreFichero);
+        String texto = LT.readLine();
+        System.out.println("");
+        //Assignam a secuenciaBuscada el text a cercar al fitxer.
+        Linia secuenciaBuscada = new Linia(texto);
+        Linia secuenciaLeida;
+        LiniaFicheroIn fich = new LiniaFicheroIn(nombreFichero);
 
-                    while (fich.hayLineas()) {
-                        secuenciaLeida = fich.lectura();
-                        if (secuenciaLeida.contienePalabra(secuenciaBuscada)) {
-                            encontrado = true;
-                            System.out.println("El texto: "
-                                    + secuenciaBuscada.toString()
-                                    + secuenciaLeida.imprimirLugarExacto());
-                        }
-                    }
-                    if(!encontrado){
-                        System.out.println("El texto a buscar no aparece en el"
-                                + "fichero.");
-                    }
+        //Llegim linies del fitxer que tractam.
+        while (fich.hayLineas()) {
+            secuenciaLeida = fich.lectura();
+            //Comprovam si la linia llegida, conté el text a cercar.
+            if (secuenciaLeida.contienePalabra(secuenciaBuscada)) {
+                encontrado = true;
+                //Imprimim per pantalla el lloc exacte on es troba 
+                //el text introduït per teclat.
+                System.out.println("El texto: "
+                        + secuenciaBuscada.toString()
+                        + secuenciaLeida.imprimirLugarExacto());
+            }
+        }
+        //En el cas de no haver trobat el text cercat, mostram 
+        //per pantalla el següent codi.
+        if (!encontrado) {
+            System.out.println("El texto a buscar no aparece en el"
+                    + "fichero.");
+        }
     }
 
     public static void main(String[] args) throws Exception {

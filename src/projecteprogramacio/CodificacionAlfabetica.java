@@ -46,7 +46,7 @@ public class CodificacionAlfabetica {
 
     //Mètode que obté la posició en l'array alfabeto d'un caràcter passat per
     //paràmetre.
-    public int posicion(char caracter) {
+    private int posicion(char caracter) {
         int indice;
         for (indice = 0; caracter != ALFABETO[indice]; indice++) {
         }
