@@ -10,7 +10,7 @@ public class ProjecteProgramacio {
     public void ProgramaPrincipal() throws Exception {
         CodificacionAlfabetica cod;
         int semilla;
-        PalabraServicio anal = new PalabraServicio();
+        PalabraServicio anal;
 
         abrirArchivo();
         if (!sortir) {
@@ -23,34 +23,47 @@ public class ProjecteProgramacio {
         while (!sortir) {
             borrarPantalla();
             menu();
-            System.out.print("INTRODUCE LA OPCION A REALIZAR: ");
+            System.out.print("Introduce la opción ha realizar: ");
             int opcioMenu = LT.readInt();
+            System.out.println(" ");
             switch (opcioMenu) {
                 case 0:
-                    //Sortir del while, fi del programa
+                    //Sortir del while, fi del programa.
                     sortir = true;
                     break;
 
                 case 1:
-
+                    //Primera opció del menú.
                     anal = new PalabraServicio();
+                    System.out.println("La opción introducida es mostrar por "
+                            + "pantalla la letra más repetida y su frecuecnia de "
+                            + "aparición. \n");
                     anal.letraMasRepetida(nombreFichero);
                     break;
 
                 case 2:
-
+                    //Segona opció del menú.
                     anal = new PalabraServicio();
+                    System.out.println("La opción introducida es mostrar por "
+                            + "pantalla la frecuencia de aparición de los "
+                            + "caracteres que forman el fichero. ");
                     anal.frecuenciaCaracteres(nombreFichero);
                     break;
 
                 case 3:
-
+                    //Tercera opció del menú.
+                    System.out.println("La opción introducida es mostrar por "
+                            + "pantalla la(s) palabra(s) que más se reptie "
+                            + "en el fichero. \n");
                     anal = new PalabraServicio();
                     anal.palabraMasFrecuente(nombreFichero);
                     break;
 
                 case 4:
-
+                    //Quarta opció del menú.
+                    System.out.println("La opción introducia es mostrar por "
+                            + "pantalla la localización exacta de la palabra "
+                            + "introducida por teclado en el fichero. \n");
                     anal = new PalabraServicio();
                     anal.localizarPalabra(nombreFichero);
                     break;
@@ -61,7 +74,7 @@ public class ProjecteProgramacio {
                     //llegida des del teclat també és troba al fitxer.
                     //Imprimim per pantalla, el lloc exacte on és troba la 
                     //linia cercada.
-                    System.out.print("TEXTO A BUSCAR (MÁXIMO 250 CARACTERES): ");
+                    System.out.print("Texto a buscar (máximo 250 caracteres): ");
                     String texto = LT.readLine();
                     Linia secuenciaBuscada = new Linia(texto);
                     Linia secuenciaLeida;
@@ -78,17 +91,31 @@ public class ProjecteProgramacio {
                     break;
 
                 case 6:
+                    //Sexta opció del menú.
+                    System.out.println("La opción introducida es mostar por "
+                            + "pantalla la localización exacte de dos palabras "
+                            + "seguidas iguales en el fichero.");
                     anal = new PalabraServicio();
                     anal.palabraSeguidas(nombreFichero);
                     break;
 
                 case 7:
+                    //Sèptima opció del menú.
+                    System.out.println("La opción introducida es codiifcar el "
+                            + "fichero tractado hasta el momento.");
+                    System.out.println("Creamos un fichero con la extensión"
+                            + "'.cod.txt' \n");
                     System.out.print("Introducir semilla: ");
                     semilla = LT.readInt();
+                    System.out.println("\n");
                     cod = new CodificacionAlfabetica(semilla);
                     cod.codificarTexto(nombreFichero);
                     break;
 
+                default:
+                    System.out.println("Opción introducida incorrecta.");
+                    
+                    
             }
 
         }
@@ -97,7 +124,9 @@ public class ProjecteProgramacio {
     //Mètode per imprimir per pantalla el menu.
     public void menu() {
         System.out.println("-------------------------------------------------");
+        System.out.println("-------------------------------------------------");
         System.out.println("MENU DE OPCIONES: ");
+        System.out.println("0.SALIR DEL PROGRAMA");
         System.out.println("1.LETRA MÁS REPTIDA Y NÚMERO DE APARICIONES");
         System.out.println("2.NÚMERO DE APARICIONES DE CADA CARÁCTER");
         System.out.println("3.PALABRA MÁS REPETIDA Y NÚMERO DE APARICIONES");
@@ -105,7 +134,7 @@ public class ProjecteProgramacio {
         System.out.println("5.BUSCAR UN TEXTO");
         System.out.println("6.BUSCAR PALABRAS REPETIDAS");
         System.out.println("7.CODIFICAR UN FICHERO");
-        System.out.println("0.SALIR DEL PROGRAMA");
+        System.out.println("-------------------------------------------------");
         System.out.println("-------------------------------------------------");
 
     }
