@@ -150,7 +150,7 @@ public class ProjecteProgramacio {
         if (comprovarTerminacion()) {
             System.out.println("ATENCIÓN: El fichero introducido esta codificado.\n"
                     + "Quieres decodificarlo antes de entrar al menu?(s/n)");
-            if ('s' == LT.readChar()) {
+            if ( 's' == LT.readChar()) {
                 System.out.println("Introduce la semilla: ");
                 CodificacionAlfabetica cod = new CodificacionAlfabetica(LT.readInt());
                 cod.deCodificarTexto(nombreFichero);

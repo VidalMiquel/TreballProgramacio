@@ -64,18 +64,26 @@ public class CodificacionAlfabetica {
         return false;
     }
 
+    //Mètode que engloba el procés de codificar el fitxer corresponent.
     public void codificarTexto(String fichero) throws Exception {
+        //Inicialitzam els objectes per llegir i escriure linies.
         LiniaFicheroIn fich = new LiniaFicheroIn(fichero);
         LiniaFicheroOut fichCod = new LiniaFicheroOut(fichero + ".cod.txt");
 
         Linia secuencia;
         Linia auxiliar;
         int codigo;
+        //Llegim linies des del fitxer especificat.
         while (fich.hayLineas()) {
+            //Inicialitzam la linia auxiliar a la qual guardarem la 
+            //linia codificada.
             auxiliar = new Linia();
             secuencia = fich.lectura();
+            //Recorrem la linia llegida.
             for (int i = 0; i < secuencia.getNumeroCaracteres(); i++) {
+                //Codifica caràcter a caràcter la linia llegida.
                 codigo = (char) codificar(secuencia.obtenerCaracter(i));
+                //Afegiex a la linia auxiliar, el caràcter codificat.
                 auxiliar.añadirCaracter(codigo);
             }
             fichCod.escrituraLinia(auxiliar);
@@ -85,19 +93,25 @@ public class CodificacionAlfabetica {
         fichCod.cerrarFichero();
         System.out.println("Fichero codificado correctamente. (" + fichero + ".cod.txt)");
     }
-
+    //Mètode que engloba el procés de codificar el fitxer corresponent.
     public void deCodificarTexto(String fichero) throws Exception {
-
+        //Inicialitzam els objectes per llegir i escriure linies.
         LiniaFicheroIn fichCod = new LiniaFicheroIn(fichero);
         LiniaFicheroOut fichDec = new LiniaFicheroOut(fichero + ".decod.txt");
         Linia secuenciaCod;
         Linia ayuda;
         int codi;
+        //Llegim linies des del fitxer especificat.
         while (fichCod.hayLineas()) {
+            //Inicialitzam la linia ayuda a la qual guardarem la 
+            //linia deCodificada.
             ayuda = new Linia();
             secuenciaCod = fichCod.lectura();
+            //Recorrem la linia llegida.
             for (int i = 0; i < secuenciaCod.getNumeroCaracteres(); i++) {
+                //DeCodifica caràcter a caràcter la linia llegida.
                 codi = (char) deCodificar(secuenciaCod.obtenerCaracter(i));
+                //Afegiex a la linia ayuda, el caràcter deCodificat.
                 ayuda.añadirCaracter(codi);
             }
             fichDec.escrituraLinia(ayuda);
