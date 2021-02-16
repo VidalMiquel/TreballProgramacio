@@ -45,6 +45,7 @@ public class PalabraFicheroIn {
                 || (caracter == '>'));
     }
 
+    //Mètode que cerca la seguent paraula del fitxer
     private void buscarPalabras() throws IOException {
         while ((caracter == ESPACIO) || (caracter == RETURN) || (caracter == SALTO_LINEA)
                 || (esSeparador(caracter))) {
@@ -52,7 +53,8 @@ public class PalabraFicheroIn {
             caracter = BufferedFicheroIn.read();
         }
     }
-
+    
+    //Mètode que llegeix la seguent paraula del fitxer
     public Palabra lectura() throws IOException {
 
         Palabra palabra = new Palabra();
@@ -75,7 +77,7 @@ public class PalabraFicheroIn {
         return palabra;
     }
 
-    //Mètode que  incrementa els atirbuts linia i columna, segons
+    //Mètode que  incrementa els atributs linia i columna, segons
     //on es trobi la linia lletgida dins el fitxer.
     private void actualizacionLineaColumna() {
         if (caracter == SALTO_LINEA) {

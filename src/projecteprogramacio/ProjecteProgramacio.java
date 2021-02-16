@@ -170,7 +170,7 @@ public class ProjecteProgramacio {
                 CodificacionAlfabetica cod = new CodificacionAlfabetica(LT.readInt());
                 //Decodificam el fitxer
                 cod.deCodificarTexto(nombreFichero);
-                //Nou nom del fitxer, actualment codificat.
+                //Nou nom del fitxer, actualment decodificat.
                 nombreFichero += ".decod.txt";
             } else {
                 //Codi a executar si volem  NO volem decodificar 
@@ -181,15 +181,17 @@ public class ProjecteProgramacio {
     }
 
     //Mètode que comprova si el fitxer a tractar està codificat.
-    //COMENTAR JOAN PA
     private boolean comprovarTerminacion() {
+        //Convertim els Strings a Char [] per poder tractarlos
         char[] cod = ".cod.txt".toCharArray();
         char[] nom = nombreFichero.toCharArray();
-
+        //Comprovam que la longitud del nom sigui mes gran que 
+        //la terminacio a comprovar
         if (cod.length <= nom.length) {
             int nomI = nom.length - 1;
             int codI = cod.length - 1;
-
+            //Bucle que comprova si el final del nom del arxiu es igual 
+            //a la terminacio
             for (; (codI >= 0); codI--) {
                 if (cod[codI] != nom[nomI]) {
                     return false;
