@@ -13,6 +13,7 @@ public class ProjecteProgramacio {
         int semilla;
         PalabraServicio anal;
 
+        System.out.println("PRÁCTICA PROGRAMACIÓN I: ANALIZADOR DE FICHEROS.");
         //Realitzam les comprovacions prèvies per poder tractar un fitxer.
         abrirArchivo();
         if (!sortir) {
@@ -80,13 +81,12 @@ public class ProjecteProgramacio {
                             + "pantalla la localización exacta del texto "
                             + "introducido por teclado en el fichero. \n");
                     buscarTexto();
-
                     break;
 
                 case 6:
                     //Sexta opció del menú.
                     System.out.println("La opción introducida es mostar por "
-                            + "pantalla la localización exacte de dos palabras "
+                            + "pantalla la localización exacta de dos palabras "
                             + "seguidas iguales en el fichero. \n");
                     anal = new PalabraServicio();
                     anal.palabraSeguidas(nombreFichero);
@@ -94,13 +94,13 @@ public class ProjecteProgramacio {
 
                 case 7:
                     //Sèptima opció del menú.
-                    System.out.println("La opción introducida es codiifcar el "
-                            + "fichero tractado hasta el momento.");
+                    System.out.println("La opción introducida es codificar el "
+                            + "fichero tratado hasta el momento.");
                     System.out.println("Creamos un fichero con la extensión"
                             + "'.cod.txt' \n");
                     System.out.print("Introducir semilla: ");
                     semilla = LT.readInt();
-                    System.out.println("\n");
+                    System.out.println("");
                     cod = new CodificacionAlfabetica(semilla);
                     cod.codificarTexto(nombreFichero);
                     break;
@@ -166,8 +166,9 @@ public class ProjecteProgramacio {
                     + "Quieres decodificarlo antes de entrar al menu?(s/n)");
             //Codi a executar si volem decodificar el fitxer a tractar.
             if ('s' == LT.readChar()) {
-                System.out.println("Introduce la semilla: ");
-                CodificacionAlfabetica cod = new CodificacionAlfabetica(LT.readInt());
+                System.out.print("Introduce la semilla: ");
+                int semilla = LT.readInt();
+                CodificacionAlfabetica cod = new CodificacionAlfabetica(semilla);
                 //Decodificam el fitxer
                 cod.deCodificarTexto(nombreFichero);
                 //Nou nom del fitxer, actualment decodificat.

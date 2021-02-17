@@ -61,7 +61,7 @@ public class Linia {
     }
     
     //Mètode que comprova si una linia passada per paràmetre es troba dins
-    //la linia que crida el mètode. //REVISAR PA
+    //la linia que crida el mètode.
     public boolean contienePalabra(Linia a) {
       
         //Comprovam que la linia passada per paràmetre té un nombre
@@ -118,7 +118,7 @@ public class Linia {
         }
         
         String salida = "";
-        salida = salida + "Aparece en la linia " 
+        salida = salida + " aparece en la linia " 
                 + (this.linia+1) + " y la columna " + columna;
 
         return salida;

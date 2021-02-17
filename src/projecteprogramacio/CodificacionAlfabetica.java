@@ -23,7 +23,8 @@ public class CodificacionAlfabetica {
     //Mètode que obté el caràcter codificat del caràcter passat per paràmetre.
     private char codificar(char caracter) {
         if (valido(caracter)) {
-            return ALFABETO[(posicion(caracter) + desplazamiento) % NUMERO_CARACTERES];
+            return ALFABETO[(posicion(caracter) + desplazamiento) 
+                    % NUMERO_CARACTERES];
         } else {
             return caracter;
         }
@@ -91,7 +92,8 @@ public class CodificacionAlfabetica {
         }
         fich.cerrarFichero();
         fichCod.cerrarFichero();
-        System.out.println("Fichero codificado correctamente. (" + fichero + ".cod.txt)");
+        System.out.println("Fichero codificado correctamente. "
+                + "(" + fichero + ".cod.txt)");
     }
     //Mètode que engloba el procés de codificar el fitxer corresponent.
     public void deCodificarTexto(String fichero) throws Exception {
@@ -115,10 +117,12 @@ public class CodificacionAlfabetica {
                 ayuda.añadirCaracter(codi);
             }
             fichDec.escrituraLinia(ayuda);
+            fichDec.nuevaLinea();
 
         }
         fichCod.cerrarFichero();
         fichDec.cerrarFichero();
-        System.out.println("Fichero decodificado correctamente. (" + fichero + ".decod.txt)");
+        System.out.println("Fichero decodificado correctamente. "
+                + "(" + fichero + ".decod.txt)");
     }
 }

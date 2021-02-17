@@ -22,7 +22,7 @@ public class LiniaFicheroIn {
         BufferedFicheroIn = new BufferedReader(FileFicheroIn);
     }
 
-    //Metode que comprova si hi ha linies per llegir
+    //Metode que comprova si hi ha linies per llegir.
     public boolean hayLineas() throws Exception {
         codigo = BufferedFicheroIn.read();
         return (codigo != FINAL_FICHERO);
@@ -48,7 +48,7 @@ public class LiniaFicheroIn {
         return linea;
     }
 
-    //Mètode que  incrementa els atirbuts linia i columna, segons
+    //Mètode que  incrementa el valor dels atributs linia i columna, segons
     //on es trobi la linia lletgida dins el fitxer.
     private void actualizacionLineaColumna() {
         if (codigo == SALTO_LINEA) {

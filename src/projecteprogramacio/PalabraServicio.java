@@ -63,7 +63,7 @@ public class PalabraServicio {
         }
         //Concatenam al String salida la lletra més repetida i les vegades
         //que apareix.
-        salida = salida + "Caracter más repetido es '"
+        salida = salida + "El caracter alfabético más repetido es '"
                 + letra + "' con "
                 + caracterMasRepetido + " apariciones.";
 
@@ -278,7 +278,7 @@ public class PalabraServicio {
 
     //Mètode que engloba el procés de contablilitar si el número de paraules
     //diferentes que hi ha dins el fitxer, no supera el límit establert.
-    public boolean comprovarParaulesDiferents(String fichero) throws IOException {
+    public boolean comprovarParaulesDiferents(String fichero)throws IOException{
         PalabraFicheroIn fich = new PalabraFicheroIn(fichero);
         Palabra pal;
 
@@ -288,7 +288,8 @@ public class PalabraServicio {
         }
         fich.cerrarFichero();
         if (!(numeroPalabras < NUMERO_MAXIMO_PALABRAS)) {
-            System.out.println("El fichero contiene demasiadas palabras diferentes. Limite: " + NUMERO_MAXIMO_PALABRAS);
+            System.out.println("El fichero contiene demasiadas palabras "
+                    + "diferentes. Limite: " + NUMERO_MAXIMO_PALABRAS);
             return true;
         } else {
             return false;
@@ -298,9 +299,10 @@ public class PalabraServicio {
     //Mètode que s'encarrega de llegir caràcters des del fitxer.
     private void lecturaCaracters(String fichero) throws IOException {
         FileReader input;
-
+        BufferedReader bufIn;
+        
         input = new FileReader(fichero);
-        BufferedReader bufIn = new BufferedReader(input);
+        bufIn = new BufferedReader(input);
 
         int lectura = bufIn.read();
         while (lectura != -1) {
