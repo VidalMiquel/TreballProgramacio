@@ -33,6 +33,7 @@ public class PalabraFicheroIn {
         BufferedFicheroIn.close();
     }
 
+    //Mètode que comprova si queden linies per llegir al fitxer.
     public boolean hayPalabras() throws IOException {
         buscarPalabras();
         return (caracter != FINAL_FICHERO);
@@ -40,15 +41,17 @@ public class PalabraFicheroIn {
 
     //Mètode que comprova si el caràcter llegit es un separador del fitxer.
     private boolean esSeparador(int caracter) {
-        return ((caracter == ',') || (caracter == '.') || (caracter == ':') || (caracter == '@') || (caracter == '?')
-                || (caracter == '!') || (caracter == '"') || (caracter == '(') || (caracter == ')') || (caracter == '<')
+        return ((caracter == ',') || (caracter == '.') || (caracter == ':') || 
+                (caracter == '@') || (caracter == '?')
+                || (caracter == '!') || (caracter == '"') || (caracter == '(') 
+                || (caracter == ')') || (caracter == '<')
                 || (caracter == '>'));
     }
 
-    //Mètode que cerca la seguent paraula del fitxer
+    //Mètode que cerca la seguent paraula del fitxer.
     private void buscarPalabras() throws IOException {
-        while ((caracter == ESPACIO) || (caracter == RETURN) || (caracter == SALTO_LINEA)
-                || (esSeparador(caracter))) {
+        while ((caracter == ESPACIO) || (caracter == RETURN) ||
+                (caracter == SALTO_LINEA) || (esSeparador(caracter))) {
             actualizacionLineaColumna();
             caracter = BufferedFicheroIn.read();
         }
@@ -60,8 +63,9 @@ public class PalabraFicheroIn {
         Palabra palabra = new Palabra();
 
         boolean asignacionPosicion = false;
-        while ((caracter != FINAL_FICHERO) && (caracter != ESPACIO) && (caracter != RETURN)
-                && (caracter != SALTO_LINEA) && (!esSeparador(caracter))) {
+        while ((caracter != FINAL_FICHERO) && (caracter != ESPACIO) 
+                && (caracter != RETURN)  && (caracter != SALTO_LINEA) 
+                && (!esSeparador(caracter))) {
             if (!asignacionPosicion) {
                 palabra.putLinea(linea);
                 palabra.putColumna(columna);
