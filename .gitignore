@@ -8,6 +8,7 @@
 *.ipr
 *.ids
 *.orig
+*.txt
 classes/
 out/
 
